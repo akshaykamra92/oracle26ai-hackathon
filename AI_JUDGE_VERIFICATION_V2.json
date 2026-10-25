@@ -58,6 +58,26 @@
         },
         {
           "action": "assertText",
+          "selector": "#proof-proposals",
+          "value": "11"
+        },
+        {
+          "action": "assertText",
+          "selector": "#proof-blocked",
+          "value": "4"
+        },
+        {
+          "action": "assertText",
+          "selector": "#proof-backfills",
+          "value": "1"
+        },
+        {
+          "action": "assertText",
+          "selector": "#proof-source-breaches",
+          "value": "0"
+        },
+        {
+          "action": "assertText",
           "selector": "#decisions",
           "value": "Move order: RN-12: Orlando Float Pool \u2192 Orlando West; then RN-02: Orlando West \u2192 New Tampa Rehab."
         },
@@ -87,7 +107,8 @@
         "anyText": [],
         "visibleSelectors": [
           "#decisions",
-          "#site-rows"
+          "#site-rows",
+          ".proof-strip"
         ]
       }
     },
