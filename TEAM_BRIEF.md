@@ -8,6 +8,8 @@
 
 **First user:** a central workforce planner at a multi-facility health system. A nursing operations leader reviews the clinical example. **First buyer hypothesis:** a system-level workforce or operations leader responsible for expansion; buyer and willingness-to-pay claims still require validation.
 
+**Initial reach signal:** [AHA Fast Facts](https://www.aha.org/statistics/fast-facts-us-hospitals) reports 3,567 U.S. community hospitals in a health system. This frames the healthcare wedge; it is not a count of potential contracts or proof of demand.
+
 **Wide application:** the same planning question appears in distributed service operations. Our Orlando and Phoenix examples use Associate → Senior Associate → Team Lead, so the demo already shows the workflow without nursing licenses. Retail, field service, hospitality, and other markets remain hypotheses, not validated customer segments.
 
 ## Why it matters
@@ -23,6 +25,8 @@ The [American Hospital Association's workforce scan](https://www.aha.org/system/
 | Phoenix service hub | **Wait for role mix or hire experience.** 6 of 6 people available, but only 1 of 2 senior and 0 of 1 lead at opening. | Career ladder raises the projected mix to ready at the +24-month sampled checkpoint, contingent on tenure, rating, skill, approvals, and continued availability. Raising demand to 7 shows that promotion cannot add headcount. |
 
 The executive view calls this an **early-career** mix based on synthetic job code and time in role. It does not use employee age. Senior or lead staff can satisfy overlapping capability minima while still counting as one person.
+
+The new evidence strip reports 11 proposals checked, 4 blocked, 1 backfill, and 0 modeled source-floor breaches in the Tampa fixture. These are synthetic outputs. A first pilot should measure median time from opening request to a reviewer-accepted plan and the number of source conflicts detected before a transfer is approved, against that organization's observed manual baseline.
 
 ## Rules and boundaries
 

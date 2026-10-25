@@ -99,6 +99,10 @@ function renderMetrics(result) {
   $("selected-count").textContent = result.destinationCoverage.total;
   $("gap-count").textContent = result.headcountGap;
   $("backfill-count").textContent = result.backfillCount;
+  $("proof-proposals").textContent = result.decisions.length;
+  $("proof-blocked").textContent = result.decisions.filter(item => !item.ok).length;
+  $("proof-backfills").textContent = result.backfillCount;
+  $("proof-source-breaches").textContent = result.sourceCoverage.filter(item => item.deficits.length).length;
 }
 
 function renderMix(result) {
@@ -261,6 +265,14 @@ function run() {
 
 $("scenario-select").addEventListener("change", applyScenario);
 $("run-button").addEventListener("click", run);
+$("whatif-button").addEventListener("click", () => {
+  $("scenario-select").value = "phoenix";
+  applyScenario();
+  $("total-input").value = "7";
+  run();
+  $("executive-title").scrollIntoView({ behavior: "smooth", block: "center" });
+});
+$("reset-button").addEventListener("click", applyScenario);
 for (const key of ["total", "senior", "lead", "specialty"]) $(key + "-input").addEventListener("input", run);
 $("copy-button").addEventListener("click", async () => {
   if (!latestSummary) return;

@@ -2,7 +2,7 @@
 
 A standalone, synthetic workforce expansion planner built for a two-hour hackathon. It answers a practical question: **can we staff a new location from our existing workforce without creating a shortage elsewhere, and if not, when might the right role mix become available?**
 
-**[Live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/)** · **[Team brief](TEAM_BRIEF.md)** · **[Submission draft](SUBMISSION_DRAFT.md)**
+**[Live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/)** · **[Team brief](TEAM_BRIEF.md)** · **[Revised submission copy](SUBMISSION_V2_DRAFT.md)** · **[Judge feedback response](JUDGE_FEEDBACK_RESPONSE.md)**
 
 The default example is a proposed Tampa rehab unit. The same planner also runs two **nonlicensed service** examples, showing that the demand → eligibility → source coverage → future readiness workflow can support other job families when their rules are configured.
 
@@ -14,7 +14,7 @@ Open `index.html` directly in a browser, or serve the folder for clipboard suppo
 python3 -m http.server 8765
 ```
 
-Visit `http://localhost:8765/`. The Tampa plan runs automatically. Change the scenario or the total, senior, lead, or rehab-skill requirements to recalculate. No installation, login, database, API key, or build step is required.
+Visit `http://localhost:8765/`. The Tampa plan runs automatically. Change the scenario or the total, senior, lead, or rehab-skill requirements to recalculate. The **Try Phoenix +1 role** button demonstrates that career progression cannot create an extra person; **Reset selected scenario** restores its starting demand. No installation, login, database, API key, or build step is required.
 
 Run the planner checks with:
 
@@ -37,6 +37,8 @@ The Tampa decision trail contains four distinct proof points:
 3. RN-03 is blocked because Orlando ICU would drop below its total floor; the local search finds no eligible backfill. RN-11 is blocked by mobility, RN-04 by an expired Florida license at the proposed opening, and RN-05 by no Florida RN authority in the demo data.
 4. The plan continues to other sources and reports the remaining one-person gap rather than assuming every high-scoring candidate can move.
 
+The evidence strip above the decision trail counts what each synthetic run actually checked. In Tampa it shows **11 proposals evaluated, 4 blocked, 1 backfill move, and 0 source locations below their modeled minima after the plan**. These are reproducible demo outputs, not customer usage or measured savings.
+
 ## Model and forecast
 
 `planner.js` contains fictional locations, job codes, employees, and deterministic rules. RN I, RN II, and Charge RN form one licensed family. Associate, Senior Associate, and Team Lead form a nonlicensed service family. A higher-level person can satisfy a senior or lead minimum **and** one total headcount position; they never count as two people. Each proposed move is checked against job family, required skill, geography or stated mobility, destination-state license for RNs, and source total/senior/lead minima. The planner searches up to two local backfill hops and rejects a chain that would leave a source short.
@@ -53,6 +55,9 @@ The source table shows before → after totals and senior/lead coverage. “Room
 - `WORKFORCE_MODEL.md`: implemented rules, assumptions, and expansion path.
 - `BUILD_HANDOFF.md`: copy-ready prompts for other Codex chats.
 - `SUBMISSION_DRAFT.md`: portal answers and spoken demo script for team review.
+- `SUBMISSION_V2_DRAFT.md`: revised portal answers based on AI Judge feedback.
+- `JUDGE_FEEDBACK_RESPONSE.md`: feedback, implemented changes, market signal, and proposed pilot KPI.
+- `AI_JUDGE_VERIFICATION.json` and `AI_JUDGE_VERIFICATION_V2.json`: original submitted browser checks and revised checks for the guided what-if. Recheck the portal's current verification contract before a new submission.
 - `RUBRIC_MAP.md`: evidence map against the visible AI Judge rubric.
 
 ## Limits and technology disclosure

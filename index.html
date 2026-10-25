@@ -6,9 +6,9 @@
     <meta name="theme-color" content="#10243a" />
     <title>Can We Staff It? — Workforce expansion planner</title>
     <meta name="description" content="A synthetic workforce scenario planner for expansion, role mix, transfer chains, and career readiness." />
-    <link rel="stylesheet" href="styles.css?v=role-mix-1" />
+    <link rel="stylesheet" href="styles.css?v=judge-feedback-2" />
     <script src="planner.js?v=role-mix-1" defer></script>
-    <script src="app.js?v=role-mix-1" defer></script>
+    <script src="app.js?v=judge-feedback-2" defer></script>
   </head>
   <body>
     <header class="topbar">
@@ -47,6 +47,17 @@
           <div class="action-wrap"><button id="run-button" class="primary" type="button">Evaluate workforce <span aria-hidden="true">↗</span></button></div>
         </div>
         <p id="scenario-context" class="micro">A senior RN counts once toward total headcount and can also satisfy the senior minimum. These are illustrative planning rules, not clinical standards.</p>
+        <div class="what-if">
+          <div>
+            <p class="eyebrow">GUIDED WHAT-IF</p>
+            <h3>Can a promotion fill an extra position?</h3>
+            <p>Stress-test Phoenix by adding one role. Compare its six available people with a seven-person opening, then reset to see the original career forecast.</p>
+          </div>
+          <div class="what-if-actions">
+            <button id="whatif-button" class="secondary" type="button">Try Phoenix +1 role</button>
+            <button id="reset-button" class="text-button" type="button">Reset selected scenario</button>
+          </div>
+        </div>
         <p id="input-error" class="input-error" role="alert" hidden></p>
       </section>
 
@@ -62,6 +73,11 @@
         <article class="metric"><span>MOVES APPROVED</span><strong id="selected-count">—</strong><small>destination positions covered</small></article>
         <article class="metric accent"><span>HEADCOUNT GAP</span><strong id="gap-count">—</strong><small>still unfilled</small></article>
         <article class="metric"><span>BACKFILL MOVES</span><strong id="backfill-count">—</strong><small>included in approved chains</small></article>
+      </section>
+
+      <section class="proof-strip" aria-label="Demo evidence">
+        <div><p class="eyebrow">WHAT THIS RUN CHECKED</p><p><strong id="proof-proposals">—</strong> proposals evaluated · <strong id="proof-blocked">—</strong> blocked · <strong id="proof-backfills">—</strong> backfill moves · <strong id="proof-source-breaches">—</strong> source locations below their modeled minimum after the plan</p></div>
+        <small>Calculated from fictional scenario data; these are demo outputs, not customer results.</small>
       </section>
 
       <section class="panel mix-panel" aria-labelledby="mix-title">
