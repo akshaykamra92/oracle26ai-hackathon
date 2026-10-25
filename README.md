@@ -57,6 +57,8 @@ The source table shows before → after totals and senior/lead coverage. “Room
 - `SUBMISSION_DRAFT.md`: portal answers and spoken demo script for team review.
 - `SUBMISSION_V2_DRAFT.md`: revised portal answers based on AI Judge feedback.
 - `SUBMISSION_V2_RECORD.md`: exact answers accepted as version 2, evaluation Run #3157.
+- `SUBMISSION_V3_DRAFT.md`: revised copy with an explicit, unvalidated pilot target.
+- `PILOT_SCORECARD.md`: first buyer, measurable pilot design, market context, and expansion hypothesis.
 - `JUDGE_FEEDBACK_RESPONSE.md`: feedback, implemented changes, market signal, and proposed pilot KPI.
 - `AI_JUDGE_VERIFICATION.json` and `AI_JUDGE_VERIFICATION_V2.json`: original submitted browser checks and revised checks for the guided what-if. Recheck the portal's current verification contract before a new submission.
 - `RUBRIC_MAP.md`: evidence map against the visible AI Judge rubric.

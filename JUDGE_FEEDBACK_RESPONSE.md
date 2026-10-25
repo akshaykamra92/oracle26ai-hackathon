@@ -17,3 +17,7 @@ In a design-partner pilot, timestamp an opening request and the first plan a wor
 ## Prototype versus production
 
 Shipped: public static app, synthetic rosters, deterministic move and short-chain search, source-floor checks, conditional career forecast, repeatable browser interactions, automated planner tests. Production work would require current HRIS and credential data, scheduling/FTE and skill rules approved by the organization, authentication and role-based access, audit records, privacy review, and human sign-off. The app does not currently run an AI model or Oracle database.
+
+## What version 2 taught us
+
+Version 2 (Run #3157) scored 67.8 versus version 1's 71.0. Technical Execution stayed at 98/100. The new synthetic evidence counts did not satisfy the judge's request for a measurable **customer outcome**; it flagged `missing_outcome_evidence` and again asked for a concrete impact KPI. The shorter portal answers also obscured the exact before-and-after transfer cascade and product design choices. [PILOT_SCORECARD.md](PILOT_SCORECARD.md) now specifies the proposed outcome measurement and its unvalidated target. We must keep that target separate from results already achieved.
