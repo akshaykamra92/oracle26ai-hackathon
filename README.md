@@ -2,6 +2,8 @@
 
 A standalone, synthetic workforce planning demo for a two-hour hackathon build.
 
+The product question is broader than this one scenario: when an organization opens a new site or service, how much demand can it cover internally without leaving existing teams below their required coverage? This version demonstrates the question with healthcare data and rules.
+
 **Live demo:** https://akshaykamra92.github.io/oracle26ai-hackathon/
 
 The demo asks whether a proposed 40-bed rehab unit in Tampa can draw registered nurses from existing units without violating *illustrative* source-unit coverage and destination-license rules. It ranks candidates by a synthetic rehab score, checks each proposed move, records rejections, revises the plan, and shows the immediate gap. A separate career panel shows a possible longer-term LPN-to-RN pathway without counting unlicensed staff as current RN coverage.
@@ -37,6 +39,7 @@ This is a **rules-engine prototype**, not a live AI agent or Oracle integration.
 - `TEAM_BRIEF.md`: case statement, scope, and success criteria.
 - `BUILD_HANDOFF.md`: copy-ready prompts for another Codex chat.
 - `SUBMISSION_DRAFT.md`: pitch text, demo script, and submission checklist.
+- `RUBRIC_MAP.md`: honest mapping from the AI Judge rubric to current proof and next evidence.
 
 ## Limits
 

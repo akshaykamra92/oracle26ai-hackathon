@@ -2,15 +2,21 @@
 
 ## Case statement
 
-When a healthcare organization considers opening a new unit, its planners need a quick way to see whether internal transfers could cover the new unit **without dropping existing units below a defined staffing floor**. A ranked list of qualified employees is insufficient if moving those employees creates a shortage elsewhere or their destination-state license is invalid.
+When a distributed organization opens a new site or service, leaders need to know whether they can staff it internally **without creating a shortage elsewhere**. A list of qualified employees does not answer that question: every transfer changes coverage at the source, and some employees are ineligible for the destination.
 
-**Can We Staff It?** demonstrates a rule-constrained planning loop. It ranks synthetic RN candidates for a proposed Tampa rehab unit, checks each move against the source-unit floor and destination license, rejects invalid moves, and revises the plan. It then distinguishes the immediate unfilled RN positions from a possible longer-term career pathway.
+**Can We Staff It?** starts with healthcare, where this trade-off is especially visible. It ranks synthetic RN candidates for a proposed Tampa rehab unit, checks each move against the source-unit floor and destination license, rejects invalid moves, and reports the feasible internal coverage and remaining gap. It keeps a possible longer-term career pathway separate from today's qualified staffing.
 
 ## Target user and value
 
-- **User:** workforce planner or nursing operations leader exploring a scenario.
+- **First user:** workforce planner at a multi-facility health system. A nursing operations leader reviews the result.
+- **First buyer hypothesis:** a health system workforce or operations leader responsible for expansion and coverage. This needs customer validation.
 - **Question answered:** “How many of the new unit's modeled RN positions can we cover from our current roster without breaking our rules?”
 - **Distinctive moment:** a high-scoring candidate is rejected because the source unit would fall below its floor. The plan continues with other candidates and reports a real gap instead of hiding it.
+- **Broader product hypothesis:** the same demand → eligible people → source coverage → feasible moves → remaining gap workflow could serve field service, retail, or other multi-site organizations with their own rules. The current demo implements only the healthcare scenario.
+
+## Why this problem matters
+
+The [American Hospital Association's 2026 workforce scan](https://www.aha.org/system/files/media/file/2025/12/2026-Health-Care-Workforce-Scan-Executive-Summary.pdf) describes staffing shortages, rising demand, and efforts to allocate staff time more effectively. [AHRQ's patient-safety primer](https://psnet.ahrq.gov/primer/nursing-and-patient-safety) explains that staffing levels and skill mix matter to patient safety. These sources support the importance of the category; they do not prove how long a specific hospital takes to plan a transfer or that a buyer would pay for this product. The team should validate those claims with prospective users.
 
 ## Two-hour MVP
 
@@ -37,8 +43,8 @@ When a healthcare organization considers opening a new unit, its planners need a
 - A potential LPN-to-RN pathway does not create a licensed RN today. Education, examination, and licensure must be verified before any real role change. See the [Florida Board of Nursing](https://floridasnursing.gov/nurse-rn-lpn/) for actual licensure requirements.
 - Future Oracle, live data, and real AI agent integration are outside this MVP.
 
-## Team decision still needed
+## Pitch direction for team review
 
-Decide whether the submission should emphasize **workforce planning** or **the rule-checking interaction**. The current demo supports both. Confirm any sponsor technology requirements before describing the app as an Oracle project.
+Lead with the **workforce expansion decision** and use the rule-checking rejection as proof. A concise version: “Before opening a new unit, see how many roles can be filled internally without leaving another unit short—and see the honest gap.” Keep the first customer specific to multi-facility healthcare. Mention other industries as a future application of the planning pattern, not as markets already served. Confirm any sponsor technology requirements before describing the app as an Oracle project.
 
 The signed-in portal's visible rubric gives 25% to problem severity, 20% to target customer and market scope, 20% to solution fit and design, 20% to technical execution and demo proof, and 15% to differentiation and investment readiness. Keep the user story specific and point judges to the [live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/).

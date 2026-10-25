@@ -4,15 +4,15 @@ The signed-in contestant form asks for four written answers, a required **Demo U
 
 ## What did you build?
 
-We built **Can We Staff It?**, a standalone staffing scenario planner. For a proposed 40-bed rehab unit in Tampa, it ranks synthetic RN candidates, checks each proposed move against the source unit's modeled staffing floor and destination-state license, and records why a move is accepted or rejected. The default scenario covers 6 of 8 RN positions and reports an honest gap of 2.
+We built **Can We Staff It?**, a staffing scenario planner for a common expansion question: can an organization staff a new service internally without leaving existing teams short? The live healthcare example models a proposed 40-bed rehab unit in Tampa. It ranks synthetic RN candidates, checks each move against the source unit's modeled coverage floor and destination-state license, and explains every decision. It covers 6 of 8 RN positions and reports a gap of 2.
 
 ## Who has this problem?
 
-The first user is a workforce planner or nursing operations leader evaluating whether a new unit can draw staff from existing units. In a spreadsheet-based planning exercise, they must compare candidate skills with source-unit coverage and license status, then recalculate when a transfer fails a rule. The same problem can recur at health systems considering new units, service lines, or transfers across facilities. This prototype illustrates the workflow; the team has not yet validated demand with prospective buyers.
+Our first user is a central workforce planner at a multi-facility health system evaluating a new unit. They need to reconcile qualifications, destination eligibility, and coverage at every unit that might supply staff. A candidate list alone can hide the shortage a transfer creates elsewhere. Similar trade-offs may occur in field service, retail, and other multi-site operations, but this prototype demonstrates healthcare only. We have not yet validated the workflow or willingness to pay with prospective buyers.
 
 ## How does your app solve it?
 
-Before using the app, a planner may see a list of strong candidates but miss what their departure does to other units. In the demo, they enter the new unit's beds and RN threshold, press **Build staffing plan**, and see a proposal → check → revise trail. A high-scoring RN is rejected because Orlando West would drop from its modeled floor of 6 to 5. Expired and wrong-state licenses are also rejected. The final view shows approved moves, source-unit margins, the remaining gap, and a future career pathway kept separate from current coverage.
+The planner enters the new unit's beds and RN threshold, presses **Build staffing plan**, and sees a proposal → check → revise trail. The highest-ranked RN is accepted, but the next is rejected because Orlando West would drop to 5 RNs against a modeled floor of 6. Expired and wrong-state licenses are also rejected. The final view shows feasible moves, source-unit margins, the remaining gap, and a future career pathway kept separate from current coverage.
 
 ## How did you build it?
 
@@ -34,11 +34,11 @@ Can We Staff It?
 
 ## One-line description
 
-A transparent staffing scenario planner that rejects internal transfers when they would breach a modeled source-unit coverage floor or destination-license rule.
+A scenario planner that shows how much expansion demand can be staffed internally without leaving an existing team below its coverage floor.
 
 ## Problem
 
-Opening a new healthcare unit creates demand for staff, but moving people from existing units can create a new shortage. A candidate's skills alone are not enough: planners must see the effect on the source unit and verify destination-state licensure.
+Opening a new site or service creates demand for skilled people, but moving them from existing teams can create a new shortage. For a first healthcare use case, a planner needs to see each candidate's qualifications, destination-state license, and the effect of the move on the source unit. This is a general planning pattern for distributed organizations, with healthcare as the only workflow implemented in the demo.
 
 ## Solution and demo
 
