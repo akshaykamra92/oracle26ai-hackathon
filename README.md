@@ -2,7 +2,7 @@
 
 A standalone, synthetic workforce expansion planner built for a two-hour hackathon. It answers a practical question: **can we staff a new location from our existing workforce without creating a shortage elsewhere, and if not, when might the right role mix become available?**
 
-**[Live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/)** · **[Team brief](TEAM_BRIEF.md)** · **[Revised submission copy](SUBMISSION_V4_DRAFT.md)** · **[Judge feedback response](JUDGE_FEEDBACK_RESPONSE.md)**
+**[Live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/)** · **[Team brief](TEAM_BRIEF.md)** · **[Revised submission copy](SUBMISSION_V5_DRAFT.md)** · **[Judge feedback response](JUDGE_FEEDBACK_RESPONSE.md)**
 
 The default example is a proposed Tampa rehab unit. The same planner also runs two **nonlicensed service** examples, showing that the demand → eligibility → source coverage → future readiness workflow can support other job families when their rules are configured.
 
@@ -60,7 +60,10 @@ The source table shows before → after totals and senior/lead coverage. “Room
 - `SUBMISSION_V3_DRAFT.md`: revised copy with an explicit, unvalidated pilot target.
 - `SUBMISSION_V3_RECORD.md`: exact answers accepted as version 3, evaluation Run #3166.
 - `SUBMISSION_V4_DRAFT.md`: tighter problem-to-product submission copy for the next judging run.
+- `SUBMISSION_V4_RECORD.md`: exact answers accepted as version 4, evaluation Run #3184 and its 91.7 result.
+- `SUBMISSION_V5_DRAFT.md`: version 5 copy centered on the smallest one-opening workflow.
 - `PILOT_SCORECARD.md`: first buyer, measurable pilot design, market context, and expansion hypothesis.
+- `MARKET_EVIDENCE.md`: primary market signals and claim boundaries for the first buyer hypothesis.
 - `JUDGE_FEEDBACK_RESPONSE.md`: feedback, implemented changes, market signal, and proposed pilot KPI.
 - `AI_JUDGE_VERIFICATION.json`, `AI_JUDGE_VERIFICATION_V2.json`, and `AI_JUDGE_VERIFICATION_V3.json`: browser checks for the original, guided what-if, and one-click source-cascade workflows. Recheck the portal's current verification contract before a new submission.
 - `RUBRIC_MAP.md`: evidence map against the visible AI Judge rubric.
