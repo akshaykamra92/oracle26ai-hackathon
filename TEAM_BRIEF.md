@@ -40,3 +40,5 @@ When a healthcare organization considers opening a new unit, its planners need a
 ## Team decision still needed
 
 Decide whether the submission should emphasize **workforce planning** or **the rule-checking interaction**. The current demo supports both. Confirm any sponsor technology requirements before describing the app as an Oracle project.
+
+The signed-in portal's visible rubric gives 25% to problem severity, 20% to target customer and market scope, 20% to solution fit and design, 20% to technical execution and demo proof, and 15% to differentiation and investment readiness. Keep the user story specific and point judges to the [live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/).

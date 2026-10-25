@@ -9,7 +9,7 @@ Use **GPT-6.1 Sol, medium reasoning** for the coding chat. It is a good fit for 
 Copy this into a Codex chat using GPT-6.1 Sol at medium reasoning:
 
 ```text
-You are continuing a two-hour hackathon prototype in the repository https://github.com/akshaykamra92/oracle26ai-hackathon. Read README.md, TEAM_BRIEF.md, index.html, styles.css, and app.js before editing.
+You are continuing a two-hour hackathon prototype in the repository https://github.com/akshaykamra92/oracle26ai-hackathon. Its live demo is https://akshaykamra92.github.io/oracle26ai-hackathon/. Read README.md, TEAM_BRIEF.md, index.html, styles.css, and app.js before editing.
 
 The product is “Can We Staff It?”, a standalone HTML/CSS/JS staffing scenario planner using only synthetic data. Its default demo must show a Tampa rehab unit requiring 8 RN positions, 6 rule-approved transfers, 4 rejected proposals, and a 2-RN gap. A second candidate from Orlando West must fail the source-unit floor check. Expired and wrong-state licenses must fail. Potential LPN-to-RN pathway candidates must not count as current RN coverage.
 
