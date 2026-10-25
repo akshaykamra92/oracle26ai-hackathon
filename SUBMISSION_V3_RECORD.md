@@ -3,6 +3,8 @@
 **Event:** Oracle AI World Hackathon  
 **Team:** Neon Knights  
 **Submission:** version 3, accepted October 25, 2026; evaluation Run #3166  
+**Result:** completed, 79.5 overall (+11.7 versus version 2; +8.5 versus version 1)
+
 **Source commit:** `be55038`  
 **Demo:** https://akshaykamra92.github.io/oracle26ai-hackathon/  
 **Repository:** https://github.com/akshaykamra92/oracle26ai-hackathon
@@ -24,3 +26,7 @@ Before: a spreadsheet shortlist can show a qualified Charge RN, but the planner 
 ## How did you build it?
 
 The shipped prototype is static HTML, CSS, and JavaScript with fictional rosters and a deterministic in-browser planner; it has no runtime AI or Oracle database. It checks family, level, skills, geography or opt-in, destination-state RN authority, and total/senior/lead source floors; short backfill chains are sequenced before the destination move. Career checkpoints require tenure, rating at least 3/5, skills, approval, and continued availability. Six automated tests and browser walkthroughs verify the three scenarios and Phoenix stress test. For quick adoption the UX has preloaded cases, four editable demand numbers, immediate recomputation, a one-screen executive answer, a decision trail, and a before-and-after source table. Production needs current HRIS, license, schedule, and approved policy data, access controls, audit records, and human approval. Future expansion would add job families and integrations; defensibility from validated configurations and decision history is a hypothesis, not a current asset.
+
+## Judge result
+
+The judge scored Demand Reality & Problem Severity **95/100**, Target Customer & Market Scope **75/100**, Solution Fit & Product Design **56/100**, and Technical Execution & Demo Proof **91/100**. The visible feedback called differentiation promising, without showing a numeric category score. Its main next action was to map the app's controls and outputs directly to the planner's manual pain and state the smallest useful workflow. It again mentioned demo reliability without a specific failed verification step in the visible comments. We do not claim measured customer impact or a verified browser defect from this result.
