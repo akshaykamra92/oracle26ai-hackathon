@@ -1,0 +1,279 @@
+{
+  "appName": "Can We Staff It?",
+  "baseUrl": "https://akshaykamra92.github.io/oracle26ai-hackathon/",
+  "auth": {
+    "required": false,
+    "loginPath": "",
+    "username": "",
+    "password": "",
+    "usernameSelector": "",
+    "passwordSelector": "",
+    "submitSelector": "",
+    "successUrlPattern": "",
+    "successText": []
+  },
+  "globalRules": {
+    "maxStepTimeSeconds": 45,
+    "waitForNetworkIdle": false,
+    "notes": [
+      "Public single-page demo under /oracle26ai-hackathon/. Each workflow opens this exact same-origin URL and starts from the seeded Tampa case.",
+      "One-click scenario buttons use stable data-scenario attributes; every result is calculated from fictional fixtures without a network API.",
+      "The transfer panel shows an example approved sequence, source before-and-after floors, and the planner next step. Promotions are conditional."
+    ]
+  },
+  "workflows": [
+    {
+      "id": "tampa-source-safe-cascade",
+      "name": "Tampa RN backfill and source-floor review",
+      "purpose": "The core workflow: from an RN opening to an ordered backfill, source mix, blocked candidates, and a documented remaining gap.",
+      "startPath": "/oracle26ai-hackathon/",
+      "steps": [
+        {
+          "action": "goto",
+          "value": "https://akshaykamra92.github.io/oracle26ai-hackathon/"
+        },
+        {
+          "action": "click",
+          "selector": "#run-button"
+        },
+        {
+          "action": "waitForText",
+          "value": "This opening needs another qualified source."
+        },
+        {
+          "action": "assertText",
+          "selector": "#target-count",
+          "value": "8"
+        },
+        {
+          "action": "assertText",
+          "selector": "#selected-count",
+          "value": "7"
+        },
+        {
+          "action": "assertText",
+          "selector": "#gap-count",
+          "value": "1"
+        },
+        {
+          "action": "assertText",
+          "selector": "#proof-blocked",
+          "value": "4"
+        },
+        {
+          "action": "assertText",
+          "selector": "#proof-source-breaches",
+          "value": "0"
+        },
+        {
+          "action": "assertText",
+          "selector": "#cascade-steps",
+          "value": "Backfill RN-12: Orlando Float Pool → Orlando West."
+        },
+        {
+          "action": "assertText",
+          "selector": "#cascade-steps",
+          "value": "Transfer RN-02: Orlando West → New Tampa Rehab."
+        },
+        {
+          "action": "assertText",
+          "selector": "#cascade-source-floor",
+          "value": "people 7 → 6 (min 6); senior 2 → 1 (min 1); lead 1 → 1 (min 1)."
+        },
+        {
+          "action": "assertText",
+          "selector": "#cascade-decision",
+          "value": "1 position remains unfilled."
+        },
+        {
+          "action": "assertText",
+          "selector": "#decisions",
+          "value": "Geography: RN-11 has not opted into a move to Tampa."
+        },
+        {
+          "action": "assertText",
+          "selector": "#decisions",
+          "value": "License: RN-04's FL license expires before the modeled opening date."
+        }
+      ],
+      "success": {
+        "requiredUrlPattern": "",
+        "allowedUrlPatterns": [],
+        "allText": [
+          "The backfill happens before the opening move.",
+          "7 approved · 4 blocked"
+        ],
+        "anyText": [],
+        "visibleSelectors": [
+          "#cascade-steps",
+          "#cascade-source-floor",
+          "#site-rows"
+        ]
+      }
+    },
+    {
+      "id": "orlando-ready-now",
+      "name": "Orlando nonlicensed opening ready now",
+      "purpose": "Shows the same network planner works for service roles and offers a one-click ready-at-opening decision.",
+      "startPath": "/oracle26ai-hackathon/",
+      "steps": [
+        {
+          "action": "goto",
+          "value": "https://akshaykamra92.github.io/oracle26ai-hackathon/"
+        },
+        {
+          "action": "click",
+          "selector": "button[data-scenario=\"orlando\"]"
+        },
+        {
+          "action": "waitForText",
+          "value": "The modeled workforce can open this location."
+        },
+        {
+          "action": "assertText",
+          "selector": "#target-count",
+          "value": "6"
+        },
+        {
+          "action": "assertText",
+          "selector": "#selected-count",
+          "value": "6"
+        },
+        {
+          "action": "assertText",
+          "selector": "#gap-count",
+          "value": "0"
+        },
+        {
+          "action": "assertText",
+          "selector": "#cascade-headline",
+          "value": "This direct move keeps its source covered."
+        },
+        {
+          "action": "assertText",
+          "selector": "#cascade-source-floor",
+          "value": "Orlando Service North after all moves: people 8 → 6 (min 6)"
+        },
+        {
+          "action": "assertText",
+          "selector": "#mix-grid",
+          "value": "3 / 2"
+        }
+      ],
+      "success": {
+        "requiredUrlPattern": "",
+        "allowedUrlPatterns": [],
+        "allText": [
+          "READY AT OPENING",
+          "The modeled opening is covered."
+        ],
+        "anyText": [],
+        "visibleSelectors": [
+          "#cascade-steps",
+          "#mix-grid",
+          "#site-rows"
+        ]
+      }
+    },
+    {
+      "id": "phoenix-role-mix-versus-headcount",
+      "name": "Phoenix conditional role mix and real people gap",
+      "purpose": "Shows future seniority can change the mix without inventing a seventh person.",
+      "startPath": "/oracle26ai-hackathon/",
+      "steps": [
+        {
+          "action": "goto",
+          "value": "https://akshaykamra92.github.io/oracle26ai-hackathon/"
+        },
+        {
+          "action": "click",
+          "selector": "button[data-scenario=\"phoenix\"]"
+        },
+        {
+          "action": "waitForText",
+          "value": "A path to readiness appears at the Apr 2029 checkpoint."
+        },
+        {
+          "action": "assertText",
+          "selector": "#target-count",
+          "value": "6"
+        },
+        {
+          "action": "assertText",
+          "selector": "#selected-count",
+          "value": "6"
+        },
+        {
+          "action": "assertText",
+          "selector": "#mix-grid",
+          "value": "1 / 2"
+        },
+        {
+          "action": "assertText",
+          "selector": "#mix-grid",
+          "value": "0 / 1"
+        },
+        {
+          "action": "click",
+          "selector": "#whatif-button"
+        },
+        {
+          "action": "waitForText",
+          "value": "This opening needs another qualified source."
+        },
+        {
+          "action": "assertText",
+          "selector": "#target-count",
+          "value": "7"
+        },
+        {
+          "action": "assertText",
+          "selector": "#selected-count",
+          "value": "6"
+        },
+        {
+          "action": "assertText",
+          "selector": "#gap-count",
+          "value": "1"
+        },
+        {
+          "action": "assertText",
+          "selector": "#forecast-explanation",
+          "value": "Career progression changes job level, not total workforce size"
+        },
+        {
+          "action": "click",
+          "selector": "#reset-button"
+        },
+        {
+          "action": "waitForText",
+          "value": "A path to readiness appears at the Apr 2029 checkpoint."
+        },
+        {
+          "action": "assertText",
+          "selector": "#target-count",
+          "value": "6"
+        },
+        {
+          "action": "assertText",
+          "selector": "#gap-count",
+          "value": "0"
+        }
+      ],
+      "success": {
+        "requiredUrlPattern": "",
+        "allowedUrlPatterns": [],
+        "allText": [
+          "WAIT FOR ROLE MIX",
+          "Conditional role-mix readiness first appears at the +24-month checkpoint."
+        ],
+        "anyText": [],
+        "visibleSelectors": [
+          "#timeline",
+          "#career-list"
+        ]
+      }
+    }
+  ],
+  "manualReviewTriggers": []
+}

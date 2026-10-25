@@ -2,7 +2,7 @@
 
 A standalone, synthetic workforce expansion planner built for a two-hour hackathon. It answers a practical question: **can we staff a new location from our existing workforce without creating a shortage elsewhere, and if not, when might the right role mix become available?**
 
-**[Live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/)** · **[Team brief](TEAM_BRIEF.md)** · **[Revised submission copy](SUBMISSION_V2_DRAFT.md)** · **[Judge feedback response](JUDGE_FEEDBACK_RESPONSE.md)**
+**[Live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/)** · **[Team brief](TEAM_BRIEF.md)** · **[Revised submission copy](SUBMISSION_V4_DRAFT.md)** · **[Judge feedback response](JUDGE_FEEDBACK_RESPONSE.md)**
 
 The default example is a proposed Tampa rehab unit. The same planner also runs two **nonlicensed service** examples, showing that the demand → eligibility → source coverage → future readiness workflow can support other job families when their rules are configured.
 
@@ -14,7 +14,7 @@ Open `index.html` directly in a browser, or serve the folder for clipboard suppo
 python3 -m http.server 8765
 ```
 
-Visit `http://localhost:8765/`. The Tampa plan runs automatically. Change the scenario or the total, senior, lead, or rehab-skill requirements to recalculate. The **Try Phoenix +1 role** button demonstrates that career progression cannot create an extra person; **Reset selected scenario** restores its starting demand. No installation, login, database, API key, or build step is required.
+Visit `http://localhost:8765/`. The Tampa plan runs automatically. Use the one-click case buttons or change the total, senior, lead, or rehab-skill requirements to recalculate; **Evaluate workforce** moves the view to the recommendation. The transfer panel then shows an ordered move, source before/after floors, and the planner's next step. **Try Phoenix +1 role** demonstrates that career progression cannot create an extra person; **Reset selected scenario** restores its starting demand. No installation, login, database, API key, or build step is required.
 
 Run the planner checks with:
 
@@ -59,9 +59,10 @@ The source table shows before → after totals and senior/lead coverage. “Room
 - `SUBMISSION_V2_RECORD.md`: exact answers accepted as version 2, evaluation Run #3157.
 - `SUBMISSION_V3_DRAFT.md`: revised copy with an explicit, unvalidated pilot target.
 - `SUBMISSION_V3_RECORD.md`: exact answers accepted as version 3, evaluation Run #3166.
+- `SUBMISSION_V4_DRAFT.md`: tighter problem-to-product submission copy for the next judging run.
 - `PILOT_SCORECARD.md`: first buyer, measurable pilot design, market context, and expansion hypothesis.
 - `JUDGE_FEEDBACK_RESPONSE.md`: feedback, implemented changes, market signal, and proposed pilot KPI.
-- `AI_JUDGE_VERIFICATION.json` and `AI_JUDGE_VERIFICATION_V2.json`: original submitted browser checks and revised checks for the guided what-if. Recheck the portal's current verification contract before a new submission.
+- `AI_JUDGE_VERIFICATION.json`, `AI_JUDGE_VERIFICATION_V2.json`, and `AI_JUDGE_VERIFICATION_V3.json`: browser checks for the original, guided what-if, and one-click source-cascade workflows. Recheck the portal's current verification contract before a new submission.
 - `RUBRIC_MAP.md`: evidence map against the visible AI Judge rubric.
 
 ## Limits and technology disclosure

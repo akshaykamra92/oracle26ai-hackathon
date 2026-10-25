@@ -31,6 +31,9 @@ function applyScenario() {
   $("scenario-context").textContent = scenario.destination.family === "rn"
     ? "RN I, RN II, and Charge RN share one licensed job family. Higher levels satisfy a senior or charge minimum while each person still fills only one total position. The rules are illustrative, not clinical standards."
     : "Associate, Senior Associate, and Team Lead share a nonlicensed service job family. The same planner checks role mix and source coverage without a nursing license rule.";
+  for (const button of document.querySelectorAll(".scenario-shortcut")) {
+    button.setAttribute("aria-pressed", String(button.dataset.scenario === scenario.id));
+  }
   run();
 }
 
@@ -103,6 +106,45 @@ function renderMetrics(result) {
   $("proof-blocked").textContent = result.decisions.filter(item => !item.ok).length;
   $("proof-backfills").textContent = result.backfillCount;
   $("proof-source-breaches").textContent = result.sourceCoverage.filter(item => item.deficits.length).length;
+}
+
+function renderCascade(result, forecast) {
+  const example = result.decisions.find(item => item.ok && item.chain.length > 1) ||
+    result.decisions.find(item => item.ok);
+  const headline = $("cascade-headline");
+  const steps = $("cascade-steps");
+  const floor = $("cascade-source-floor");
+  const next = $("cascade-decision");
+  const siteNames = Object.fromEntries(planner.sites.map(site => [site.id, site.name]));
+  siteNames[result.scenario.destination.id] = result.scenario.destination.name;
+
+  if (example) {
+    headline.textContent = example.chain.length > 1
+      ? "The backfill happens before the opening move."
+      : "This direct move keeps its source covered.";
+    const orderedMoves = example.chain.slice().reverse();
+    steps.replaceChildren(...orderedMoves.map(move =>
+      node("li", "", `${move.backfill ? "Backfill" : "Transfer"} ${move.personId}: ${siteNames[move.from]} → ${siteNames[move.to]}.`)
+    ));
+    const source = result.sourceCoverage.find(item => item.site.id === example.chain[0].from);
+    floor.textContent = source
+      ? `${source.site.name} after all moves: people ${source.before.total} → ${source.after.total} (min ${source.site.min.total}); senior ${source.before.senior} → ${source.after.senior} (min ${source.site.min.senior}); lead ${source.before.lead} → ${source.after.lead} (min ${source.site.min.lead}).`
+      : "Every modeled source minimum is checked after the full move sequence.";
+  } else {
+    headline.textContent = "No transfer is currently approved.";
+    steps.replaceChildren(node("li", "", "Review blocked moves below to see the constraint that prevents each transfer."));
+    floor.textContent = "The planner does not pull a person from a source it cannot keep covered.";
+  }
+
+  if (result.ready) {
+    next.textContent = "The modeled opening is covered. Review the sequence and source floors with managers before approving any actual move.";
+  } else if (result.headcountGap > 0) {
+    next.textContent = `${result.headcountGap} position${result.headcountGap === 1 ? " remains" : "s remain"} unfilled. Find another qualified source, hire, or revise the opening demand before approval.`;
+  } else if (forecast.earliest) {
+    next.textContent = `Headcount is present, but the role mix is short. Consider experienced hires or a conditional ${dateLabel(result.scenario.openingDate, forecast.earliest.months)} checkpoint after validating promotions.`;
+  } else {
+    next.textContent = "The role mix remains short through the modeled checkpoints. Revise the opening plan or add experienced capacity.";
+  }
 }
 
 function renderMix(result) {
@@ -249,6 +291,7 @@ function run() {
     $("input-error").hidden = true;
     renderExecutive(result, forecast);
     renderMetrics(result);
+    renderCascade(result, forecast);
     renderMix(result);
     renderDecisions(result);
     renderSites(result);
@@ -264,7 +307,18 @@ function run() {
 }
 
 $("scenario-select").addEventListener("change", applyScenario);
-$("run-button").addEventListener("click", run);
+for (const button of document.querySelectorAll(".scenario-shortcut")) {
+  button.addEventListener("click", () => {
+    $("scenario-select").value = button.dataset.scenario;
+    applyScenario();
+    $("executive-title").scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+}
+$("run-button").addEventListener("click", () => {
+  run();
+  const target = $("input-error").hidden ? $("executive-title") : $("input-error");
+  target.scrollIntoView({ behavior: "smooth", block: "center" });
+});
 $("whatif-button").addEventListener("click", () => {
   $("scenario-select").value = "phoenix";
   applyScenario();

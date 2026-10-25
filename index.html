@@ -6,9 +6,9 @@
     <meta name="theme-color" content="#10243a" />
     <title>Can We Staff It? — Workforce expansion planner</title>
     <meta name="description" content="A synthetic workforce scenario planner for expansion, role mix, transfer chains, and career readiness." />
-    <link rel="stylesheet" href="styles.css?v=judge-feedback-2" />
+    <link rel="stylesheet" href="styles.css?v=judge-feedback-3" />
     <script src="planner.js?v=role-mix-1" defer></script>
-    <script src="app.js?v=judge-feedback-2" defer></script>
+    <script src="app.js?v=judge-feedback-3" defer></script>
   </head>
   <body>
     <header class="topbar">
@@ -46,6 +46,12 @@
           <label class="field" id="specialty-field">REHAB SKILL <input id="specialty-input" type="number" min="0" max="30" step="1" value="2" /></label>
           <div class="action-wrap"><button id="run-button" class="primary" type="button">Evaluate workforce <span aria-hidden="true">↗</span></button></div>
         </div>
+        <div class="scenario-shortcuts" aria-label="One-click demo cases">
+          <span>TRY A DECISION</span>
+          <button type="button" class="scenario-shortcut" data-scenario="tampa">Tampa · backfill cascade</button>
+          <button type="button" class="scenario-shortcut" data-scenario="orlando">Orlando · ready now</button>
+          <button type="button" class="scenario-shortcut" data-scenario="phoenix">Phoenix · future mix</button>
+        </div>
         <p id="scenario-context" class="micro">A senior RN counts once toward total headcount and can also satisfy the senior minimum. These are illustrative planning rules, not clinical standards.</p>
         <div class="what-if">
           <div>
@@ -80,33 +86,42 @@
         <small>Calculated from fictional scenario data; these are demo outputs, not customer results.</small>
       </section>
 
+      <section class="panel cascade-panel" aria-labelledby="cascade-title">
+        <div class="section-heading"><div><p class="eyebrow">03 / SEE THE NETWORK CONSEQUENCE</p><h2 id="cascade-title">Follow a transfer and its source</h2></div><p class="muted">A first-pass plan for source-manager review, not an automatic transfer approval.</p></div>
+        <div class="cascade-grid">
+          <article class="cascade-card"><span>MANUAL STEP</span><p>A roster shortlist shows a candidate. The planner then calls source managers to find out whether that move uncovers another team.</p></article>
+          <article class="cascade-card cascade-result"><span>THIS PLAN SHOWS</span><strong id="cascade-headline">Checking an example move…</strong><ol id="cascade-steps"></ol><p id="cascade-source-floor"></p></article>
+          <article class="cascade-card"><span>PLANNER'S NEXT STEP</span><p id="cascade-decision"></p></article>
+        </div>
+      </section>
+
       <section class="panel mix-panel" aria-labelledby="mix-title">
-        <div class="section-heading"><div><p class="eyebrow">03 / DESTINATION MIX</p><h2 id="mix-title">The role stack at the new location</h2></div><p class="muted">One person may meet multiple capability minimums, but fills only one total position.</p></div>
+        <div class="section-heading"><div><p class="eyebrow">04 / DESTINATION MIX</p><h2 id="mix-title">The role stack at the new location</h2></div><p class="muted">One person may meet multiple capability minimums, but fills only one total position.</p></div>
         <div id="mix-grid" class="mix-grid"></div>
       </section>
 
       <div class="content-grid">
         <section class="panel decision-panel" aria-labelledby="decisions-title">
-          <div class="section-heading"><div><p class="eyebrow">04 / PROPOSE → CHECK → REVISE</p><h2 id="decisions-title">Decision trail</h2></div><span id="decision-count" class="status">—</span></div>
+          <div class="section-heading"><div><p class="eyebrow">05 / PROPOSE → CHECK → REVISE</p><h2 id="decisions-title">Decision trail</h2></div><span id="decision-count" class="status">—</span></div>
           <div id="decisions" class="decisions" aria-live="polite"></div>
         </section>
 
         <aside class="panel coverage-panel" aria-labelledby="coverage-title">
-          <div class="section-heading"><div><p class="eyebrow">05 / CURRENT STACK</p><h2 id="coverage-title">Source locations</h2></div></div>
+          <div class="section-heading"><div><p class="eyebrow">06 / CURRENT STACK</p><h2 id="coverage-title">Source locations</h2></div></div>
           <div class="table-scroll"><table><thead><tr><th>LOCATION</th><th>TOTAL</th><th>SENIOR</th><th>LEAD</th><th>ROOM</th></tr></thead><tbody id="site-rows"></tbody></table></div>
           <p class="micro">Cells show before → after, with the modeled minimum below. “Room” is headcount above the total minimum after moves; senior and lead minimums are also checked.</p>
         </aside>
       </div>
 
       <section class="panel future-panel" aria-labelledby="future-title">
-        <div class="section-heading"><div><p class="eyebrow">06 / FUTURE READINESS</p><h2 id="future-title">Career ladder and expansion timing</h2></div><span class="status">CONDITIONAL FORECAST</span></div>
+        <div class="section-heading"><div><p class="eyebrow">07 / FUTURE READINESS</p><h2 id="future-title">Career ladder and expansion timing</h2></div><span class="status">CONDITIONAL FORECAST</span></div>
         <p class="micro future-intro">Checkpoints are months after the proposed opening date. A promotion is a possible career milestone, subject to the stated tenure, a rating of at least 3/5, required skills, and a real approval decision.</p>
         <div id="timeline" class="timeline"></div>
         <div class="future-columns"><div><h3>Who could progress?</h3><div id="career-list" class="career-list"></div></div><div class="forecast-note"><h3>What this forecast means</h3><p id="forecast-explanation"></p></div></div>
       </section>
 
       <section class="panel outcome-panel" aria-labelledby="outcome-title">
-        <div class="section-heading"><div><p class="eyebrow">07 / THE ANSWER</p><h2 id="outcome-title">Plan summary</h2></div><button id="copy-button" class="text-button" type="button">Copy summary</button></div>
+        <div class="section-heading"><div><p class="eyebrow">08 / THE ANSWER</p><h2 id="outcome-title">Plan summary</h2></div><button id="copy-button" class="text-button" type="button">Copy summary</button></div>
         <p id="outcome"></p>
       </section>
 
