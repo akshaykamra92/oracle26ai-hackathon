@@ -4,8 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#10243a" />
-    <title>Can We Staff It? — Synthetic staffing scenario</title>
+    <title>Can We Staff It? — Workforce expansion planner</title>
+    <meta name="description" content="A synthetic workforce scenario planner for expansion, role mix, transfer chains, and career readiness." />
     <link rel="stylesheet" href="styles.css" />
+    <script src="planner.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -17,58 +19,82 @@
     <main class="shell">
       <section class="hero">
         <div>
-          <p class="eyebrow">WORKFORCE SCENARIO PLANNER</p>
-          <h1>Open a new unit.<br /><em>Protect every existing one.</em></h1>
-          <p class="lead">Before opening a new site or service, see how much demand your existing workforce can cover without leaving another team short. This healthcare example shows every rejected transfer and the gap that remains.</p>
+          <p class="eyebrow">WORKFORCE EXPANSION INTELLIGENCE</p>
+          <h1>Open a new location.<br /><em>Know when your people are ready.</em></h1>
+          <p class="lead">Model the whole workforce network before moving anyone: job family and level, location fit, source coverage, backfill chains, and the career path that may unlock a future opening.</p>
         </div>
-        <div class="hero-note"><span class="pulse"></span> Local rules engine · no database or API</div>
+        <div class="hero-note"><span class="pulse"></span> Runs locally · no account needed</div>
       </section>
 
-      <section class="scenario panel" aria-labelledby="scenario-title">
+      <section class="panel scenario" aria-labelledby="scenario-title">
         <div class="section-heading">
-          <div><p class="eyebrow">01 / HEALTHCARE EXAMPLE</p><h2 id="scenario-title">Tampa rehab unit</h2></div>
-          <p class="muted">Synthetic, single-shift planning exercise</p>
+          <div><p class="eyebrow">01 / DEFINE THE OPENING</p><h2 id="scenario-title">Choose a workforce scenario</h2></div>
+          <p class="muted">Three fictional locations, two job families</p>
         </div>
-        <div class="request-grid">
-          <label>Beds <input id="beds" type="number" min="10" max="80" step="10" value="40" /></label>
-          <label>Minimum RNs per 10 beds <input id="ratio" type="number" min="0.5" max="4" step="0.5" value="2" /></label>
-          <div class="location"><span>LOCATION</span><strong>Tampa, Florida</strong></div>
-          <div class="action-wrap"><button id="run-button" class="primary" type="button">Build staffing plan <span aria-hidden="true">↗</span></button></div>
+        <div class="scenario-grid">
+          <label class="field wide">SCENARIO
+            <select id="scenario-select">
+              <option value="tampa">Tampa rehab unit · licensed RNs</option>
+              <option value="orlando">Orlando service hub · ready senior bench</option>
+              <option value="phoenix">Phoenix service hub · career pipeline</option>
+            </select>
+          </label>
+          <div class="location"><span>PROPOSED OPENING</span><strong id="opening-location">Tampa, FL · Apr 2027</strong></div>
+          <label class="field">TOTAL PEOPLE <input id="total-input" type="number" min="1" max="30" step="1" value="8" /></label>
+          <label class="field">SENIOR OR HIGHER <input id="senior-input" type="number" min="0" max="30" step="1" value="2" /></label>
+          <label class="field">TEAM LEAD / CHARGE <input id="lead-input" type="number" min="0" max="30" step="1" value="1" /></label>
+          <label class="field" id="specialty-field">REHAB SKILL <input id="specialty-input" type="number" min="0" max="30" step="1" value="2" /></label>
+          <div class="action-wrap"><button id="run-button" class="primary" type="button">Evaluate workforce <span aria-hidden="true">↗</span></button></div>
         </div>
-        <p class="micro">This ratio is an illustrative demo rule, not a legal or clinical staffing standard.</p>
+        <p id="scenario-context" class="micro">A senior RN counts once toward total headcount and can also satisfy the senior minimum. These are illustrative planning rules, not clinical standards.</p>
+        <p id="input-error" class="input-error" role="alert" hidden></p>
+      </section>
+
+      <section class="panel executive" aria-labelledby="executive-title">
+        <div class="executive-top"><p class="eyebrow">02 / EXECUTIVE DECISION</p><span id="executive-status" class="status">Evaluating</span></div>
+        <h2 id="executive-title">Checking the workforce network…</h2>
+        <p id="executive-explanation"></p>
+        <div id="executive-action" class="executive-action"></div>
       </section>
 
       <section class="metrics" aria-label="Plan summary">
-        <article class="metric"><span>RN TARGET</span><strong id="target-count">8</strong><small>for the new unit</small></article>
-        <article class="metric"><span>APPROVED MOVES</span><strong id="selected-count">—</strong><small>under the demo rules</small></article>
-        <article class="metric accent"><span>REMAINING GAP</span><strong id="gap-count">—</strong><small>needs another source</small></article>
-        <article class="metric"><span>RULE REJECTIONS</span><strong id="rejected-count">—</strong><small>blocked before saving</small></article>
+        <article class="metric"><span>POSITIONS NEEDED</span><strong id="target-count">—</strong><small>at the new location</small></article>
+        <article class="metric"><span>MOVES APPROVED</span><strong id="selected-count">—</strong><small>destination positions covered</small></article>
+        <article class="metric accent"><span>HEADCOUNT GAP</span><strong id="gap-count">—</strong><small>still unfilled</small></article>
+        <article class="metric"><span>BACKFILL MOVES</span><strong id="backfill-count">—</strong><small>included in approved chains</small></article>
+      </section>
+
+      <section class="panel mix-panel" aria-labelledby="mix-title">
+        <div class="section-heading"><div><p class="eyebrow">03 / DESTINATION MIX</p><h2 id="mix-title">The role stack at the new location</h2></div><p class="muted">One person may meet multiple capability minimums, but fills only one total position.</p></div>
+        <div id="mix-grid" class="mix-grid"></div>
       </section>
 
       <div class="content-grid">
         <section class="panel decision-panel" aria-labelledby="decisions-title">
-          <div class="section-heading">
-            <div><p class="eyebrow">02 / PROPOSE → CHECK → REVISE</p><h2 id="decisions-title">Decision trail</h2></div>
-            <span id="plan-status" class="status">Ready to plan</span>
-          </div>
-          <div id="decisions" class="decisions" aria-live="polite">
-            <div class="empty-state">Press <strong>Build staffing plan</strong> to evaluate candidates in skill order. Every proposed move is checked before it enters the plan.</div>
-          </div>
+          <div class="section-heading"><div><p class="eyebrow">04 / PROPOSE → CHECK → REVISE</p><h2 id="decisions-title">Decision trail</h2></div><span id="decision-count" class="status">—</span></div>
+          <div id="decisions" class="decisions" aria-live="polite"></div>
         </section>
 
         <aside class="panel coverage-panel" aria-labelledby="coverage-title">
-          <div class="section-heading"><div><p class="eyebrow">03 / GUARDRAILS</p><h2 id="coverage-title">Source unit coverage</h2></div></div>
-          <div class="table-scroll"><table><thead><tr><th>UNIT</th><th>RNs</th><th>FLOOR</th><th>ROOM</th></tr></thead><tbody id="unit-rows"></tbody></table></div>
-          <p class="micro">“Room” is the number of RNs above the synthetic floor after planned moves.</p>
+          <div class="section-heading"><div><p class="eyebrow">05 / CURRENT STACK</p><h2 id="coverage-title">Source locations</h2></div></div>
+          <div class="table-scroll"><table><thead><tr><th>LOCATION</th><th>TOTAL</th><th>SENIOR</th><th>LEAD</th><th>ROOM</th></tr></thead><tbody id="site-rows"></tbody></table></div>
+          <p class="micro">Cells show before → after, with the modeled minimum below. “Room” is headcount above the total minimum after moves; senior and lead minimums are also checked.</p>
         </aside>
       </div>
 
-      <section class="panel outcome-panel" aria-labelledby="outcome-title">
-        <div class="section-heading"><div><p class="eyebrow">04 / THE ANSWER</p><h2 id="outcome-title">What can we staff?</h2></div><button id="copy-button" class="text-button" type="button" disabled>Copy summary</button></div>
-        <div id="outcome" class="outcome-empty">Run the scenario to see approved transfers, the remaining gap, and the longer-term career pathway.</div>
+      <section class="panel future-panel" aria-labelledby="future-title">
+        <div class="section-heading"><div><p class="eyebrow">06 / FUTURE READINESS</p><h2 id="future-title">Career ladder and expansion timing</h2></div><span class="status">CONDITIONAL FORECAST</span></div>
+        <p class="micro future-intro">Checkpoints are months after the proposed opening date. A promotion is a possible career milestone, subject to the stated tenure, a rating of at least 3/5, required skills, and a real approval decision.</p>
+        <div id="timeline" class="timeline"></div>
+        <div class="future-columns"><div><h3>Who could progress?</h3><div id="career-list" class="career-list"></div></div><div class="forecast-note"><h3>What this forecast means</h3><p id="forecast-explanation"></p></div></div>
       </section>
 
-      <footer>Demo data is fictional. Results are an illustration of rule-based planning and must not be used for real staffing or licensure decisions.</footer>
+      <section class="panel outcome-panel" aria-labelledby="outcome-title">
+        <div class="section-heading"><div><p class="eyebrow">07 / THE ANSWER</p><h2 id="outcome-title">Plan summary</h2></div><button id="copy-button" class="text-button" type="button">Copy summary</button></div>
+        <p id="outcome"></p>
+      </section>
+
+      <footer>Every employee, location, rating, policy, and opening date in this prototype is fictional. This deterministic demo does not use a live AI model or Oracle database. It is not a clinical staffing, licensure, or employment decision system.</footer>
     </main>
   </body>
 </html>

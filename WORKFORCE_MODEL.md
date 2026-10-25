@@ -1,58 +1,46 @@
-# Workforce model — design for the next demo iteration
+# Workforce model — implemented demo and next steps
 
-This is a **proposed design**, not a claim that the current standalone app implements all of it. The current app checks direct RN transfers against a single headcount floor and Florida license. It does not yet model job families, seniority, mobility, or backfill chains.
+## Planning question
 
-## Problem statement
+For a proposed new unit or location, **which people can move without taking any existing source below its required mix, and when could a different career mix make expansion viable?** This is a network question. The current stack, destination requirements, geography, practice authority when relevant, and every backfill move must be evaluated together.
 
-When a multi-site organization opens a new service, it needs a specific mix of people at the new location. The people who appear qualified may already be supporting required coverage elsewhere. A transfer can also create a vacancy that requires another transfer. The planner needs to know which moves are feasible across the **whole workforce network**, why others fail, and what remains to hire.
+The standalone demo implements this with fictional data in `planner.js`. It is a deterministic illustration, not a clinical standard, automatic employment decision, or full workforce optimizer.
 
-**First use case:** a multi-facility health system opening a Tampa rehab unit. The same demand, eligibility, source-coverage, and backfill pattern could later serve other distributed workforces with different role rules.
+## Data and rules currently implemented
 
-## Planner workflow
-
-1. **Inspect the current stack.** Show each location's on-shift headcount by job family, level, and required capability. Show its required minimum and genuine spare capacity.
-2. **Define demand.** The planner chooses the new location and enters a role mix, such as total RNs, senior RNs, and rehab-qualified RNs. A model may draft a mix from an approved template, but a human confirms the requirements.
-3. **Find eligible people.** Match job family, level, skills, destination practice authority, shift availability, and employee-declared mobility or commute region.
-4. **Simulate moves.** After each proposed transfer, check every source unit's remaining headcount and capability mix. If a required position opens, search for a qualified backfill. Continue until the chain reaches genuine spare capacity; otherwise mark it unresolved.
-5. **Explain the answer.** Show the feasible move chains, the final coverage of every affected location, rejected chains and their reasons, and the remaining new-site and backfill hiring needs. A manager approves moves outside the simulation.
-
-## Rules the demo should make visible
-
-| Rule | Example |
+| Concept | Demo behavior |
 | --- | --- |
-| Headcount floor | Orlando West has 7 RNs and a floor of 6. Moving one RN leaves 6, so that move is allowed without backfill. |
-| Capability minimum | A unit might require one charge-qualified RN. Moving its only qualified RN fails even if total RN headcount stays above 6. |
-| Job-family compatibility | RN2 may fill an RN1-level assignment if local policy allows. RN1 cannot fill a charge role; LPN and CNA do not count toward an RN minimum. These mappings are configurable, not universal facts. |
-| No double counting | A senior or charge RN can satisfy a senior-skill requirement and an RN headcount slot, but remains one person for the total RN count. |
-| Destination eligibility | A clinical move needs verified authority to practice in the destination state and any required unit skills. [NCSBN](https://ncsbn.org/nurse-licensure-guidance) says requirements vary by state. |
-| Geographic feasibility | Default candidate pool is the same metro or another employee-approved commute region. Longer moves require an explicit relocation preference and destination eligibility. A New York resident is not automatically a California candidate. Avoid collecting a precise home address for this demo. |
-| Full-chain feasibility | An immediate move chain is feasible only if it ends at genuine spare capacity. If it needs a future hire, mark it contingent and report the gap. A cycle of transfers does not create net capacity. |
+| Job family | RN I, RN II, and Charge RN form a licensed RN family. Associate, Senior Associate, and Team Lead form a nonlicensed service family. A different family cannot satisfy demand. |
+| Level and mix | Level 2+ satisfies a senior minimum; level 3 satisfies a lead or charge minimum. Both still count as **one** person toward total headcount. The demand inputs let a planner change total, senior, lead, and rehab-skill minima. |
+| Source stack | Every source has fictional total, senior, and lead minima. The table shows before → after and headcount room. A 7-to-6 move at floor 6 is allowed. A charge move may still need backfill if it would break the charge minimum. |
+| Destination fit | A candidate needs the destination's job family and any required skill. Candidates in the same metro are considered; longer moves need a recorded synthetic mobility opt-in. A New York candidate is not assumed willing to move to Tampa. |
+| RN authority | An RN move needs recorded destination-state authority valid on the proposed opening date. [NCSBN](https://ncsbn.org/nurse-licensure-guidance) notes that actual requirements vary by state. The service examples have no RN license rule. |
+| Backfill chains | The planner tentatively moves a candidate, checks all source minima, and searches up to two eligible backfill hops if needed. It rejects a chain that cannot be repaired. The demo shows the executable order from spare capacity to new location. |
+| Search order | Synthetic candidate scores determine a greedy order. When a feasible senior, lead, or specialty candidate is available, the planner can reserve a remaining destination slot for that required mix. This is an explainable demo search, **not proof of the globally optimal staffing plan**. |
 
-The demo's RN floors are illustrative. Real clinical staffing depends on patient needs, skill mix, shift and other factors; [AHRQ](https://psnet.ahrq.gov/primer/nursing-and-patient-safety) describes why a single ratio is insufficient. The app should remain a planning aid with human approval, not an automatic clinical staffing authority.
+For Tampa, Orlando West has 7 RNs and a floor of 6. RN-01 can move directly. RN-02 is a Charge RN; moving them next would leave Orlando West below its total and charge minima. RN-12 can move from the Orlando Float Pool to Orlando West, then RN-02 can move to Tampa. Orlando ICU's RN-03 cannot move because that source would fall below 5 total and no eligible backfill chain is found. Additional candidates fail geography or Florida license checks. The final modeled result is 7 of 8 Tampa RN positions covered with one backfill move and one unfilled position.
 
-## Suggested data fields
+## Career ladder used for the forecast
 
-| Object | Minimum fields for a synthetic demo |
-| --- | --- |
-| Location / unit | ID, city or metro, state, shift, required total by family, required level or capability counts |
-| Employee | Synthetic ID, current unit, job code, job family, level, skills, shift availability, licensed practice regions, approved commute regions, relocation opt-in |
-| New demand | Destination, shift, total positions by family, minimum senior or specialty coverage |
-| Proposed move | Employee, from, to, fit explanation, effect on source, backfill chain ID, status |
+| Current code | Next code | Minimum time in current role | Performance | Additional recorded skill |
+| --- | --- | ---: | ---: | --- |
+| RN I | RN II | 24 months | ≥3/5 | Advanced |
+| RN II | Charge RN | 24 months | ≥3/5 | Leadership |
+| Associate | Senior Associate | 12 months | ≥3/5 | None |
+| Senior Associate | Team Lead | 24 months | ≥3/5 | Leadership |
 
-## How to search backfill chains
+The prototype samples readiness at the proposed Apr 2027 opening and +6, +12, +18, +24, and +36 months. At the Phoenix opening, six service positions are available, but the group has one senior-level person and no team lead against minima of two and one. Synthetic associates with the required rating may qualify for Senior Associate after 12 months. PHX-03 may qualify for Team Lead after 24 months because its fictional rating is 4/5 and leadership skill is recorded. PHX-04, rated 2/5, does not project. The first sampled checkpoint that meets the destination and source mix is +24 months, **if** promotions are approved, ratings and skills remain valid, and people remain available.
 
-For a proposed person → destination move, tentatively update both units. If the source still meets **all** minima, the chain ends. If it does not, treat the missing role or capability as a new destination and look for an eligible person from a nearby source. Reject anyone already in the chain, and keep searching until a valid chain ends at spare capacity. For a small two-hour demo, cap the chain at two or three moves and rank valid chains by fewer relocations, fewer moves, and greater remaining source coverage. Present the full chain for approval and sequence the actual moves from the spare-capacity end first.
+The forecast changes potential **level**, not headcount. Raising Phoenix demand to seven produces a one-person gap at every checkpoint. A potential RN promotion does not confer RN practice authority or replace a missing license.
 
-The current 6-of-8 result is **direct-transfer coverage only**. Once role mix and mobility are enforced, that result may rise or fall. A backfill can free a qualified Tampa candidate; geography or missing senior coverage can exclude one. The next demo must calculate and display its new result rather than preserve the old number for the pitch.
+## How to interpret the executive statement
 
-## AI's useful role
+- **Ready at opening:** demand total and all capability minima are met, and every source still meets its minima. Orlando demonstrates this.
+- **Wait for role mix:** headcount is present, but senior or lead coverage is missing; a conditional sampled future checkpoint meets the mix. Phoenix demonstrates this.
+- **Additional capacity needed:** headcount remains short through the 36-month checkpoints. Tampa demonstrates this even though its senior and charge mix is sufficient.
 
-- Translate a plain-language request into a **draft**, structured demand profile using approved role templates.
-- Summarize the current capability stack and highlight gaps or unusual constraints for planner review.
-- Explain why a chain is feasible or blocked in plain language.
+“Early-career” refers to synthetic job code and time in role. Employee age is neither stored nor used.
 
-The deterministic planner validates headcount, role compatibility, practice authority, mobility, and every move in the chain. The model must not invent a clinical minimum or override a failed rule. The standalone version can show this workflow with synthetic data and no runtime model; a later integrated version would make the AI drafting step live.
+## Important limits before real use
 
-## Strong next demo moment
-
-Show three decisions: (1) a direct move from a unit with one genuine spare RN; (2) a senior RN move that needs a local, qualified backfill and succeeds as a two-move chain; (3) a distant or unlicensed candidate rejected, leaving an honest gap. Show the location-by-location capability stack before and after.
+Real clinical staffing depends on patient needs, skill mix, shift, and more; [AHRQ](https://psnet.ahrq.gov/primer/nursing-and-patient-safety) explains why a single count is insufficient. A real system would need approved local policy, validated schedules/FTE and license records, employee preferences, role openings, compensation and labor constraints, privacy protections, and human sign-off. The demo has no live data or runtime AI. A future AI feature could draft a demand profile or summarize the decision trail, while deterministic rules and a human reviewer retain authority over eligibility and coverage.

@@ -1,25 +1,19 @@
-# AI Judge rubric map — team discussion draft
+# AI Judge rubric map — evidence, not a predicted score
 
-The signed-in [AI Judge portal](https://app.hacktheworldaway.org/) lists five categories. This is our own evidence check, **not a judge score or prediction**.
+The signed-in [hackathon portal](https://app.hacktheworldaway.org/) showed the following five categories during the team's review. This map ties each category to what the current demo can actually show.
 
-| Category | Weight | What the current project can show | What is still missing |
+| Category | Weight | Current evidence | What to say honestly |
 | --- | ---: | --- | --- |
-| Demand Reality & Problem Severity | 25% | A concrete expansion decision: moving an RN to a new unit can leave the old unit below its modeled floor. The [AHA workforce scan](https://www.aha.org/system/files/media/file/2025/12/2026-Health-Care-Workforce-Scan-Executive-Summary.pdf) documents sector staffing pressure; [AHRQ](https://psnet.ahrq.gov/primer/nursing-and-patient-safety) connects nurse staffing to patient safety. | Direct interviews or workflow evidence from planners. Do not claim “takes weeks” or monetary savings without evidence. |
-| Target Customer & Market Scope | 20% | First user: workforce planner at a multi-facility health system; operations leader reviews the plan. The problem pattern can also apply to other multi-site workforces. | Buyer validation, a defensible market estimate, and proof that other industries need this exact workflow. |
-| Solution Fit & Product Design | 20% | Live input → candidate ranking → rule checks → rejected move → feasible plan and remaining gap. The decision trail explains each rejection. | User feedback on whether these inputs and outputs match real planning work. |
-| Technical Execution & Demo Proof | 20% | Public [live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/), no login, [source code](https://github.com/akshaykamra92/oracle26ai-hackathon), reproducible default 8 needed / 6 approved / 4 rejected / 2 unfilled. | No live data, Oracle integration, or runtime AI. Any sponsor requirement for these must be checked. |
-| Differentiation & Investment Readiness | 15% | The demo makes source-team damage visible before accepting a transfer and reports an honest gap. This is a promising product angle. | Competitor comparison, customer willingness to pay, and an integration plan. Do not claim the approach is unique yet. |
+| Demand Reality & Problem Severity | 25% | Expansion can move a shortage downstream. Tampa demonstrates a direct 7 → 6 move, a charge RN backfill chain, blocked moves, and an honest remaining gap. [AHA](https://www.aha.org/system/files/media/file/2025/12/2026-Health-Care-Workforce-Scan-Executive-Summary.pdf) and [AHRQ](https://psnet.ahrq.gov/primer/nursing-and-patient-safety) support the importance of healthcare workforce planning and skill mix. | We have not interviewed a buyer or measured time or money saved. |
+| Target Customer & Market Scope | 20% | First user: central workforce planner at a multi-facility health system. Orlando and Phoenix show the same planning pattern for a nonlicensed service family. | Other industries are a product hypothesis; neither market size nor willingness to pay is validated. |
+| Solution Fit & Product Design | 20% | A judge can change demand inputs and see the executive decision, total/senior/lead mix, every proposed move, source stacks, and a conditional career timeline. | The rules and data are synthetic. A planner should review the inputs and approvals in a real workflow. |
+| Technical Execution & Demo Proof | 20% | Public [live app](https://akshaykamra92.github.io/oracle26ai-hackathon/) and [source](https://github.com/akshaykamra92/oracle26ai-hackathon), three reproducible scenarios, deterministic chain and forecast logic, and core automated checks. Tampa: 7/8 with one backfill and four blocks. Orlando: 6/6 ready. Phoenix: 6/6 headcount, role mix first ready at +24-month checkpoint. | The shipped app has no live AI model, Oracle database, production roster, or clinically validated staffing rule. Check any sponsor technology requirement before submitting. |
+| Differentiation & Investment Readiness | 15% | The combination of source impact, local backfill sequence, role mix, mobility, and future career readiness gives a concrete decision story. | Do not claim the method is unique. Competitor comparison, integration plan, and buyer validation remain future work. |
 
-## Recommended pitch
+## Suggested judge demo order
 
-**Problem:** “When a multi-site organization opens a new service, qualified employees may be available on paper, but transferring them can break coverage at the teams they leave. Planners need a fast answer to what can be staffed internally and what gap is real.”
+1. **Tampa:** Show the network consequence. Explain why 7 → 6 is allowed, then show RN-12 backfilling RN-02's charge role. Point to a blocked source move, mobility and license blocks, and the one-person gap.
+2. **Orlando:** Switch to the nonlicensed service hub. Its senior bench makes the fictional opening ready now.
+3. **Phoenix:** Show the opposite executive signal: enough headcount, too few senior and lead people. The career ladder gives a **conditional** +24-month checkpoint, while a seven-person target remains short because promotion does not create headcount.
 
-**First market:** multi-facility health systems. **First workflow:** opening a new unit. **Broader hypothesis:** configurable eligibility and source-coverage rules could make the same planning loop useful to field service, retail, and other distributed operations. These are future applications, not features the current demo implements.
-
-**Demo proof:** the highest-ranked candidate is accepted, but the second-highest is blocked when the source unit would fall to 5 RNs against a modeled floor of 6; the planner continues, approves 6 feasible transfers, and shows a gap of 2 rather than masking it.
-
-## Team questions before final submission
-
-1. Can we get one workforce planner or operations leader to react to the problem and demo? Record their words, with permission, rather than inventing validation.
-2. Is the first buyer the health system's central workforce planning team or a nursing operations leader? Choose one for the pitch.
-3. Does the event require Oracle technology in the submitted build? The current app has no Oracle or runtime AI integration.
+The sharpest problem statement is: **“When a multi-site organization opens a new service, who can actually move without uncovering another team, and when will the right role mix exist?”**

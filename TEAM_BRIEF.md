@@ -1,53 +1,50 @@
 # Team brief — Can We Staff It?
 
-## Case statement
+## Case statement for discussion
 
-When a distributed organization opens a new site or service, leaders need to know whether they can staff it internally **without creating a shortage elsewhere**. A list of qualified employees does not answer that question: every transfer changes coverage at the source, and some employees are ineligible for the destination.
+**Problem:** When a distributed organization opens a new location or service, leaders may see qualified people elsewhere in the organization, yet moving them can uncover another team. The real decision depends on the mix of job levels and skills, geography, eligibility, source minima, and possible backfill chains. A headcount total or ranked candidate list cannot show whether the whole network remains viable.
 
-**Can We Staff It?** starts with healthcare, where this trade-off is especially visible. It ranks synthetic RN candidates for a proposed Tampa rehab unit, checks each move against the source-unit floor and destination license, rejects invalid moves, and reports the feasible internal coverage and remaining gap. It keeps a possible longer-term career pathway separate from today's qualified staffing.
+**Our solution:** Can We Staff It? takes a proposed destination's demand profile, searches an existing synthetic workforce, tests every move and backfill against local rules, and gives an executive answer: **open under the modeled rules, add capacity, or wait for a conditional career pipeline**. It shows the full decision trail and source stack so planners can challenge the answer.
 
-## Target user and value
+**First user:** a central workforce planner at a multi-facility health system. A nursing operations leader reviews the clinical example. **First buyer hypothesis:** a system-level workforce or operations leader responsible for expansion; buyer and willingness-to-pay claims still require validation.
 
-- **First user:** workforce planner at a multi-facility health system. A nursing operations leader reviews the result.
-- **First buyer hypothesis:** a health system workforce or operations leader responsible for expansion and coverage. This needs customer validation.
-- **Question answered:** “How many of the new unit's modeled RN positions can we cover from our current roster without breaking our rules?”
-- **Distinctive moment:** a high-scoring candidate is rejected because the source unit would fall below its floor. The plan continues with other candidates and reports a real gap instead of hiding it.
-- **Broader product hypothesis:** the same demand → eligible people → source coverage → feasible moves → remaining gap workflow could serve field service, retail, or other multi-site organizations with their own rules. The current demo implements only the healthcare scenario.
+**Wide application:** the same planning question appears in distributed service operations. Our Orlando and Phoenix examples use Associate → Senior Associate → Team Lead, so the demo already shows the workflow without nursing licenses. Retail, field service, hospitality, and other markets remain hypotheses, not validated customer segments.
 
-## Why this problem matters
+## Why it matters
 
-The [American Hospital Association's 2026 workforce scan](https://www.aha.org/system/files/media/file/2025/12/2026-Health-Care-Workforce-Scan-Executive-Summary.pdf) describes staffing shortages, rising demand, and efforts to allocate staff time more effectively. [AHRQ's patient-safety primer](https://psnet.ahrq.gov/primer/nursing-and-patient-safety) explains that staffing levels and skill mix matter to patient safety. These sources support the importance of the category; they do not prove how long a specific hospital takes to plan a transfer or that a buyer would pay for this product. The team should validate those claims with prospective users.
+The [American Hospital Association's workforce scan](https://www.aha.org/system/files/media/file/2025/12/2026-Health-Care-Workforce-Scan-Executive-Summary.pdf) describes healthcare staffing pressure. [AHRQ's nursing and patient-safety primer](https://psnet.ahrq.gov/primer/nursing-and-patient-safety) explains why levels and skill mix matter alongside numbers. These support the category; they do not prove a specific buyer's workflow, time saved, or willingness to pay. One planner interview would improve the pitch more than an invented ROI figure.
 
-## Two-hour MVP
+## What the live demo proves
 
-1. One page with scenario inputs, visible source-unit margins, decision trail, and answer.
-2. Synthetic data only, embedded in the page. No sign-in, database, or API.
-3. Deterministic rules that generate an actual rejection and revised plan.
-4. Honest labels: the plan is illustrative and is not for real clinical decisions.
-5. A README and a one-minute demo script.
+| Scenario | Executive answer | Visible evidence |
+| --- | --- | --- |
+| Tampa RN expansion | **Additional capacity needed.** 7 of 8 positions covered, with senior and rehab minima met but one RN headcount gap. | Orlando West 7 → 6 is allowed at floor 6; RN-02 needs RN-12 as charge backfill; one source-floor block, one mobility block, and two license blocks. |
+| Orlando service hub | **Ready at the proposed opening** under fictional minima. | 6 of 6 people covered, including 3 senior-level and 1 team lead; all source sites remain at or above their modeled minima. |
+| Phoenix service hub | **Wait for role mix or hire experience.** 6 of 6 people available, but only 1 of 2 senior and 0 of 1 lead at opening. | Career ladder raises the projected mix to ready at the +24-month sampled checkpoint, contingent on tenure, rating, skill, approvals, and continued availability. Raising demand to 7 shows that promotion cannot add headcount. |
 
-## Success criteria
+The executive view calls this an **early-career** mix based on synthetic job code and time in role. It does not use employee age. Senior or lead staff can satisfy overlapping capability minima while still counting as one person.
 
-- A judge can open `index.html` and run the default scenario without setup.
-- The default scenario shows 8 target RN positions, 6 approved moves, 4 rejections, and a 2-RN gap.
-- The second Orlando West candidate is rejected with a visible source-unit shortfall.
-- Expired and wrong-state licenses are rejected.
-- No approved transfer drives a source unit below its modeled floor.
-- The career pathway is shown separately from immediate coverage.
+## Rules and boundaries
 
-## Decisions and boundaries
+- The demo uses synthetic people and one simplified staffing snapshot. All minima, ratings, and opening dates are illustrative.
+- “Approved” means the deterministic demo rules found a feasible chain. It is not a real transfer, clinical staffing approval, licensure verification, or employment decision.
+- RNs require recorded destination-state authority valid at the proposed opening; nonlicensed service roles use job-family, geography, and coverage rules without that license check.
+- A source must retain its total, senior, and lead minima after the full move chain. A source with 7 people and a floor of 6 can lose one without backfill. A cycle does not create capacity.
+- The career ladder requires 12 or 24 months in role, at least 3/5 performance, and any stated skill. Its forecast is conditional. An RN promotion never substitutes for RN licensure or creates an extra person.
+- The app is plain HTML/CSS/JavaScript with no runtime AI or Oracle database. Be explicit about that in the submission unless the implementation changes and is verified.
 
-- The plan models **one synthetic shift**, not an entire facility's staffing schedule.
-- The ratio is a demo input, not a statement of law or clinical adequacy.
-- “Approved” means approved by the demo's rules only.
-- A potential LPN-to-RN pathway does not create a licensed RN today. Education, examination, and licensure must be verified before any real role change. See the [Florida Board of Nursing](https://floridasnursing.gov/nurse-rn-lpn/) for actual licensure requirements.
-- Future Oracle, live data, and real AI agent integration are outside this MVP.
-- The current 6-of-8 result covers direct moves under a single RN floor. A move from 7 RNs down to a floor of 6 is allowed; it does not need a backfill under the modeled rule. The result is not a full workforce-network optimum.
+## 60-second pitch spine
 
-The proposed next iteration in [WORKFORCE_MODEL.md](WORKFORCE_MODEL.md) adds job families, level and specialty requirements, geographic eligibility, and backfill chains. Its result should be recalculated from those rules; do not reuse 6-of-8 if the new rules change the answer.
+1. **Problem:** “An expansion plan can look staffed on paper and still damage existing teams.”
+2. **Tampa proof:** Show a 7-to-6 move allowed, a charge move repaired by a backfill chain, and mobility/license/source-floor blocks. End on 7 of 8 filled and one honest gap.
+3. **Generality:** Switch to Orlando. The same planner shows a nonlicensed service hub with the senior bench to open.
+4. **Forward view:** Switch to Phoenix. Headcount is full but the role mix is not; a conditional career ladder points to the +24-month checkpoint.
+5. **Close:** “The planner gives an auditable expansion decision today and a grounded view of when the workforce might be ready later.”
 
-## Pitch direction for team review
+## Team questions before submitting
 
-Lead with the **workforce expansion decision** and use the rule-checking rejection as proof. A concise version: “Before opening a new unit, see how many roles can be filled internally without leaving another unit short—and see the honest gap.” Keep the first customer specific to multi-facility healthcare. Mention other industries as a future application of the planning pattern, not as markets already served. Confirm any sponsor technology requirements before describing the app as an Oracle project.
+1. Is the first buyer a central workforce planning team or an operations executive? Choose one based on the team's experience or a quick buyer conversation.
+2. Does the event require Oracle or runtime AI in the submitted app? The current demo does not claim either.
+3. Which of the three scenario moments should lead the spoken demo? Tampa has the strongest rule and backfill proof; Orlando and Phoenix show broader applicability and the career forecast.
 
-The signed-in portal's visible rubric gives 25% to problem severity, 20% to target customer and market scope, 20% to solution fit and design, 20% to technical execution and demo proof, and 15% to differentiation and investment readiness. Keep the user story specific and point judges to the [live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/).
+The [AI Judge rubric map](RUBRIC_MAP.md) ties these claims to visible proof. The [live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/) is the first thing to show a judge.

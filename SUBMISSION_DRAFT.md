@@ -1,78 +1,57 @@
-# Submission draft — Oracle AI World Hackathon portal
+# Submission draft — team review before pasting into the hackathon portal
 
-The signed-in contestant form asks for four written answers, a required **Demo URL**, an optional repo URL and video URL, and an optional verification JSON response. It says a new submission automatically starts evaluation. The text below is ready to paste after the team reviews it.
-
-## What did you build?
-
-We built **Can We Staff It?**, a staffing scenario planner for a common expansion question: can an organization staff a new service internally without leaving existing teams short? The live healthcare example models a proposed 40-bed rehab unit in Tampa. It ranks synthetic RN candidates, checks each move against the source unit's modeled coverage floor and destination-state license, and explains every decision. It covers 6 of 8 RN positions and reports a gap of 2.
-
-## Who has this problem?
-
-Our first user is a central workforce planner at a multi-facility health system evaluating a new unit. They need to reconcile qualifications, destination eligibility, and coverage at every unit that might supply staff. A candidate list alone can hide the shortage a transfer creates elsewhere. Similar trade-offs may occur in field service, retail, and other multi-site operations, but this prototype demonstrates healthcare only. We have not yet validated the workflow or willingness to pay with prospective buyers.
-
-## How does your app solve it?
-
-The planner enters the new unit's beds and RN threshold, presses **Build staffing plan**, and sees a proposal → check → revise trail. The highest-ranked RN is accepted, but the next is rejected because Orlando West would drop to 5 RNs against a modeled floor of 6. Expired and wrong-state licenses are also rejected. The final view shows feasible moves, source-unit margins, the remaining gap, and a future career pathway kept separate from current coverage.
-
-## How did you build it?
-
-The current app is plain HTML, CSS, and JavaScript. It runs in a browser with synthetic data and a deterministic rules engine; no backend, live AI model, Oracle database, or login is required. Candidates are considered in rehab-score order. Each move is approved only if the RN license matches Florida, is current, and leaves the source unit at or above its illustrative floor. The decision trail is generated from these checks, not prerecorded. We verified the default 8 / 6 / 4 / 2 result and an alternate 20-bed scenario in a browser. A future version could connect validated shift rosters and policy rules to a database.
-
-## Portal links and verification
-
-- **Demo URL (required):** https://akshaykamra92.github.io/oracle26ai-hackathon/
-- **Repo URL (optional):** https://github.com/akshaykamra92/oracle26ai-hackathon
-- **Video URL (optional):** [ADD IF RECORDED]
-- **App uses login:** No.
-- **Verification JSON (optional):** The portal instructs contestants to fill the fields first, click **Download Prompt**, run that prompt in an AI tool, and paste the full returned JSON object. Generate this from the final live demo URL; do not invent the JSON.
-
-The visible rubric weights are **problem severity 25%**, **target customer and market scope 20%**, **solution fit and design 20%**, **technical execution and demo proof 20%**, and **differentiation and investment readiness 15%**. The team should prioritize a working live link and a specific user story before claiming market size or production readiness.
+The [AI Judge portal](https://app.hacktheworldaway.org/) previously showed four written answers, a required Demo URL, optional repository and video URLs, and an optional verification JSON workflow. Recheck the live form before submitting. The copy below matches the current three-scenario standalone demo.
 
 ## Project title
 
-Can We Staff It?
+**Can We Staff It?**
 
 ## One-line description
 
-A scenario planner that shows how much expansion demand can be staffed internally without leaving an existing team below its coverage floor.
+An auditable workforce expansion planner that shows who can move without uncovering another team and when the right role mix might become available.
 
-## Problem
+## What did you build?
 
-Opening a new site or service creates demand for skilled people, but moving them from existing teams can create a new shortage. For a first healthcare use case, a planner needs to see each candidate's qualifications, destination-state license, and the effect of the move on the source unit. This is a general planning pattern for distributed organizations, with healthcare as the only workflow implemented in the demo.
+We built **Can We Staff It?**, a synthetic workforce expansion planner for multi-site organizations. A planner defines the total people and senior, lead, or specialty mix required at a new location. The app checks whether employees can move without dropping any existing source below its modeled minimum, searches short backfill chains, and gives an executive answer: ready at opening, additional capacity needed, or conditionally ready later. The live demo has a Tampa RN unit and two nonlicensed service hubs in Orlando and Phoenix.
 
-## Solution and demo
+## Who has this problem?
 
-Our standalone prototype models a proposed 40-bed rehab unit in Tampa. It ranks fictional RN candidates, checks each proposed transfer against synthetic coverage and license rules, records the reason for every rejection, and continues searching. In the default scenario, the new unit needs 8 RN positions on one modeled shift. The planner approves 6 transfers, rejects 4 proposals, and reports a remaining 2-RN gap. It shows a separate possible career pathway without counting unlicensed staff toward today's coverage.
+Our first user is a central workforce planner at a multi-facility health system, with an operations leader reviewing expansion decisions. A ranked list of qualified staff can hide the shortage a transfer creates elsewhere, and total headcount can hide a missing senior or lead role. The same planning pattern may help other distributed workforces; the service-hub scenarios demonstrate a nonlicensed job family, while broader market demand and buyer willingness to pay still need validation.
 
-## Technology and AI disclosure
+## How does your app solve it?
 
-The running demo is plain HTML, CSS, and JavaScript with a deterministic in-browser rules engine and synthetic data. It needs no database, backend, deployment service, or API key. GPT-6.1 Sol was used/recommended as a development assistant **only if your team actually uses it**. The submitted prototype does not currently call an AI model or Oracle database. Update this paragraph if the implementation changes.
+The planner enters a destination role mix and sees a proposal → check → revise trail, a before-and-after source stack, and the remaining gap. In the default Tampa scenario, Orlando West starts with 7 RNs against a fictional floor of 6, so one RN can move directly. A later Charge RN move succeeds only after a qualified RN from the local float pool backfills Orlando West. Another source move is blocked, as are a candidate without geographic opt-in and two without valid Florida authority at the proposed opening. The app covers 7 of 8 Tampa RN positions and reports one honest headcount gap. Orlando shows a ready nonlicensed senior bench. Phoenix has all 6 people but lacks senior and lead coverage at opening; a conditional career forecast first meets the mix at the +24-month sampled checkpoint.
 
-## Links
+## How did you build it?
 
-- Source: https://github.com/akshaykamra92/oracle26ai-hackathon
-- Live demo: https://akshaykamra92.github.io/oracle26ai-hackathon/
-- Video: [ADD IF RECORDED]
+The current prototype is plain HTML, CSS, and JavaScript with fictional data and a deterministic in-browser planner. It needs no account, backend, API key, or database. Candidate moves are checked against job family, skill, geography, RN destination-state authority when relevant, and source total/senior/lead minima. The planner tries up to two backfill hops and explains each block. Career milestones require 12 or 24 months in role, a rating of at least 3/5, and any required skill; future readiness remains conditional on approval and continued availability. The app does **not** currently use a runtime AI model or Oracle database, and its rules are not clinical standards. The scenarios and core guardrails are verified with automated planner checks and in a browser.
 
-## 60-second live demo script
+## Demo links
 
-1. **0–10s:** “We want to open a 40-bed Tampa rehab unit. A simple ranking of our best nurses could damage other units.”
-2. **10–25s:** Show 8 required RN positions and the source-unit floors. Press **Build staffing plan**.
-3. **25–40s:** Show RN-01 accepted, then RN-02 rejected: Orlando West would drop to 5 RNs but needs 6. Point out the expired and wrong-state license rejections.
-4. **40–52s:** Show the completed result: 6 approved moves, 2 immediate openings, and source-unit coverage preserved under the model.
-5. **52–60s:** “A possible LPN-to-RN career path appears separately because someone awaiting education and licensure cannot fill today's RN gap.”
+- **Demo URL (required in the previously observed form):** https://akshaykamra92.github.io/oracle26ai-hackathon/
+- **Repo URL:** https://github.com/akshaykamra92/oracle26ai-hackathon
+- **Video URL:** [ADD IF RECORDED]
+- **Login required:** No.
+- **Optional verification JSON:** Follow the portal's current **Download Prompt** instructions after the final URL and answers are set. Run the downloaded prompt against the actual app and paste its returned JSON; do not invent this object.
+
+## 60-second spoken demo
+
+1. **0–8s:** “Opening a new location is a network decision. Someone who looks free on paper may be protecting another team.”
+2. **8–23s:** Show Tampa's 8-person RN demand. “Orlando West has 7 against a floor of 6, so this first move is allowed. The Charge RN move needs a backfill: the float-pool RN moves first, then the Charge RN.”
+3. **23–36s:** Show the source-floor, geography, and license blocks. “The planner continues rather than hiding those conflicts.”
+4. **36–43s:** Point to 7 of 8 Tampa roles covered and one genuine headcount gap.
+5. **43–51s:** Switch to Orlando. “The same rules engine handles nonlicensed service roles; its senior bench makes the modeled hub ready.”
+6. **51–60s:** Switch to Phoenix. “Headcount is full, but the senior/lead mix is not. A conditional career ladder suggests the +24-month checkpoint. Promotion changes level; it does not create headcount.”
 
 ## 30-second fallback
 
-“We built a synthetic staffing scenario planner. It ranks internal candidates, checks each transfer before accepting it, and visibly rejects a high-scoring RN because moving them would break their current unit's floor. The default 40-bed Tampa scenario covers 6 of 8 RN positions, leaving an honest gap of 2. It also distinguishes future career candidates from staff qualified today.”
+“Can We Staff It? tests whether a new location can draw staff without uncovering existing teams. Tampa shows a direct 7-to-6 move, a charge backfill chain, rejected ineligible moves, and a real one-RN gap. Orlando demonstrates the same planner for nonlicensed service staff who are ready now. Phoenix has enough people but lacks the senior mix; a conditional career ladder points to a later opening. All data is synthetic and the app runs directly in a browser.”
 
-## Submission checks
+## Final team checks
 
-- [x] Confirm the portal's required form fields and visible judging rubric.
-- [ ] Confirm the event deadline and any sponsor technology rule.
-- [x] Run the default scenario and verify 8 target / 6 approved / 4 rejected / 2 gap.
-- [x] Confirm source code is pushed and visible to the team.
-- [x] Verify the GitHub Pages live demo URL; paste it into the required portal field when the team submits.
-- [ ] Remove or update any AI/Oracle claims that do not match the final code.
-- [ ] Have a teammate explain how the rule engine blocks a transfer.
-- [ ] After the form fields are filled, use the portal's **Download Prompt** workflow if the team wants the optional verification JSON.
+- [ ] Recheck the portal deadline, required fields, and any sponsor technology requirement.
+- [ ] Verify the deployed Pages site matches the final source and shows Tampa 7/8, Orlando 6/6 ready, and Phoenix first ready at +24 months.
+- [ ] Have a teammate challenge the first buyer, the market claim, and the 60-second script.
+- [ ] Record a video only if useful or required; add its URL if available.
+- [ ] Generate the optional verification JSON from the portal's actual prompt after the final app is live.
+- [ ] Submit only after the team chooses its final case statement and answers.
