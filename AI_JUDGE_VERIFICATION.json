@@ -1,0 +1,304 @@
+{
+  "appName": "Can We Staff It?",
+  "baseUrl": "https://akshaykamra92.github.io/oracle26ai-hackathon/",
+  "auth": {
+    "required": false,
+    "loginPath": "",
+    "username": "",
+    "password": "",
+    "usernameSelector": "",
+    "passwordSelector": "",
+    "submitSelector": "",
+    "successUrlPattern": "",
+    "successText": []
+  },
+  "globalRules": {
+    "maxStepTimeSeconds": 45,
+    "waitForNetworkIdle": false,
+    "notes": [
+      "The public single-page demo lives under /oracle26ai-hackathon/; every workflow uses that exact same-origin URL.",
+      "The scenario selector is native: press o or p while focused, then Enter, to choose Orlando or Phoenix.",
+      "All data and staffing rules are fictional; future promotions are conditional."
+    ]
+  },
+  "workflows": [
+    {
+      "id": "tampa-transfer-cascade",
+      "name": "Tampa RN transfer cascade",
+      "purpose": "Proves source-floor checks, a local backfill chain, eligibility blocks, and an honest remaining headcount gap.",
+      "startPath": "/oracle26ai-hackathon/",
+      "steps": [
+        {
+          "action": "goto",
+          "value": "https://akshaykamra92.github.io/oracle26ai-hackathon/"
+        },
+        {
+          "action": "waitForText",
+          "value": "This opening needs another qualified source."
+        },
+        {
+          "action": "assertText",
+          "selector": "#target-count",
+          "value": "8"
+        },
+        {
+          "action": "assertText",
+          "selector": "#selected-count",
+          "value": "7"
+        },
+        {
+          "action": "assertText",
+          "selector": "#gap-count",
+          "value": "1"
+        },
+        {
+          "action": "assertText",
+          "selector": "#backfill-count",
+          "value": "1"
+        },
+        {
+          "action": "assertText",
+          "selector": "#decisions",
+          "value": "Move order: RN-12: Orlando Float Pool → Orlando West; then RN-02: Orlando West → New Tampa Rehab."
+        },
+        {
+          "action": "assertText",
+          "selector": "#site-rows",
+          "value": "7 → 6"
+        },
+        {
+          "action": "assertText",
+          "selector": "#decisions",
+          "value": "Geography: RN-11 has not opted into a move to Tampa."
+        },
+        {
+          "action": "assertText",
+          "selector": "#decisions",
+          "value": "License: RN-04's FL license expires before the modeled opening date."
+        }
+      ],
+      "success": {
+        "requiredUrlPattern": "",
+        "allowedUrlPatterns": [],
+        "allText": [
+          "7 approved · 4 blocked",
+          "Move order: RN-12: Orlando Float Pool → Orlando West; then RN-02: Orlando West → New Tampa Rehab."
+        ],
+        "anyText": [],
+        "visibleSelectors": [
+          "#decisions",
+          "#site-rows"
+        ]
+      }
+    },
+    {
+      "id": "orlando-ready-service-hub",
+      "name": "Orlando nonlicensed hub ready now",
+      "purpose": "Proves the same planner works for a nonlicensed job family and checks the senior and team-lead mix.",
+      "startPath": "/oracle26ai-hackathon/",
+      "steps": [
+        {
+          "action": "goto",
+          "value": "https://akshaykamra92.github.io/oracle26ai-hackathon/"
+        },
+        {
+          "action": "press",
+          "selector": "#scenario-select",
+          "value": "o"
+        },
+        {
+          "action": "press",
+          "selector": "#scenario-select",
+          "value": "Enter"
+        },
+        {
+          "action": "waitForText",
+          "value": "The modeled workforce can open this location."
+        },
+        {
+          "action": "assertText",
+          "selector": "#target-count",
+          "value": "6"
+        },
+        {
+          "action": "assertText",
+          "selector": "#selected-count",
+          "value": "6"
+        },
+        {
+          "action": "assertText",
+          "selector": "#gap-count",
+          "value": "0"
+        },
+        {
+          "action": "assertText",
+          "selector": "#mix-grid",
+          "value": "3 / 2"
+        },
+        {
+          "action": "assertText",
+          "selector": "#mix-grid",
+          "value": "1 / 1"
+        }
+      ],
+      "success": {
+        "requiredUrlPattern": "",
+        "allowedUrlPatterns": [],
+        "allText": [
+          "READY AT OPENING",
+          "Orlando service hub: 6 of 6 service positions covered"
+        ],
+        "anyText": [],
+        "visibleSelectors": [
+          "#mix-grid",
+          "#site-rows"
+        ]
+      }
+    },
+    {
+      "id": "phoenix-career-checkpoint",
+      "name": "Phoenix conditional career readiness",
+      "purpose": "Proves that full headcount is insufficient when senior and lead coverage are short, and that the career ladder identifies a conditional later checkpoint.",
+      "startPath": "/oracle26ai-hackathon/",
+      "steps": [
+        {
+          "action": "goto",
+          "value": "https://akshaykamra92.github.io/oracle26ai-hackathon/"
+        },
+        {
+          "action": "press",
+          "selector": "#scenario-select",
+          "value": "p"
+        },
+        {
+          "action": "press",
+          "selector": "#scenario-select",
+          "value": "Enter"
+        },
+        {
+          "action": "waitForText",
+          "value": "A path to readiness appears at the Apr 2029 checkpoint."
+        },
+        {
+          "action": "assertText",
+          "selector": "#target-count",
+          "value": "6"
+        },
+        {
+          "action": "assertText",
+          "selector": "#selected-count",
+          "value": "6"
+        },
+        {
+          "action": "assertText",
+          "selector": "#gap-count",
+          "value": "0"
+        },
+        {
+          "action": "assertText",
+          "selector": "#mix-grid",
+          "value": "1 / 2"
+        },
+        {
+          "action": "assertText",
+          "selector": "#mix-grid",
+          "value": "0 / 1"
+        },
+        {
+          "action": "assertText",
+          "selector": "#forecast-explanation",
+          "value": "At +24 months, potential promotions produce enough senior and lead coverage"
+        },
+        {
+          "action": "assertText",
+          "selector": "#career-list",
+          "value": "Not projected: rating 2/5 is below the 3/5 threshold."
+        }
+      ],
+      "success": {
+        "requiredUrlPattern": "",
+        "allowedUrlPatterns": [],
+        "allText": [
+          "WAIT FOR ROLE MIX",
+          "+24 MO",
+          "Apr 2029",
+          "Not projected: rating 2/5 is below the 3/5 threshold."
+        ],
+        "anyText": [],
+        "visibleSelectors": [
+          "#timeline",
+          "#career-list"
+        ]
+      }
+    },
+    {
+      "id": "custom-demand-stays-short",
+      "name": "Custom demand reveals a real people gap",
+      "purpose": "Proves the planner responds to an edited requirement and does not count possible promotions as extra people.",
+      "startPath": "/oracle26ai-hackathon/",
+      "steps": [
+        {
+          "action": "goto",
+          "value": "https://akshaykamra92.github.io/oracle26ai-hackathon/"
+        },
+        {
+          "action": "press",
+          "selector": "#scenario-select",
+          "value": "p"
+        },
+        {
+          "action": "press",
+          "selector": "#scenario-select",
+          "value": "Enter"
+        },
+        {
+          "action": "fill",
+          "selector": "#total-input",
+          "value": "7"
+        },
+        {
+          "action": "click",
+          "selector": "#run-button"
+        },
+        {
+          "action": "waitForText",
+          "value": "This opening needs another qualified source."
+        },
+        {
+          "action": "assertText",
+          "selector": "#target-count",
+          "value": "7"
+        },
+        {
+          "action": "assertText",
+          "selector": "#selected-count",
+          "value": "6"
+        },
+        {
+          "action": "assertText",
+          "selector": "#gap-count",
+          "value": "1"
+        },
+        {
+          "action": "assertText",
+          "selector": "#forecast-explanation",
+          "value": "Career progression changes job level, not total workforce size"
+        }
+      ],
+      "success": {
+        "requiredUrlPattern": "",
+        "allowedUrlPatterns": [],
+        "allText": [
+          "Phoenix service hub: 6 of 7 service positions covered",
+          "The modeled workforce does not reach a fully ready checkpoint through +36 months."
+        ],
+        "anyText": [],
+        "visibleSelectors": [
+          "#outcome",
+          "#timeline"
+        ]
+      }
+    }
+  ],
+  "manualReviewTriggers": []
+}
