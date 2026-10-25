@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10243a" />
+    <title>Can We Staff It? — Synthetic staffing scenario</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">✳</span><span>CAN WE STAFF IT?</span></div>
+      <span class="prototype-label">SYNTHETIC PROTOTYPE</span>
+    </header>
+
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">WORKFORCE SCENARIO PLANNER</p>
+          <h1>Open a new unit.<br /><em>Protect every existing one.</em></h1>
+          <p class="lead">See how a proposed transfer can look promising, fail a staffing rule, and be replaced with a safer choice.</p>
+        </div>
+        <div class="hero-note"><span class="pulse"></span> Local rules engine · no database or API</div>
+      </section>
+
+      <section class="scenario panel" aria-labelledby="scenario-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">01 / THE REQUEST</p><h2 id="scenario-title">Tampa rehab unit</h2></div>
+          <p class="muted">Synthetic, single-shift planning exercise</p>
+        </div>
+        <div class="request-grid">
+          <label>Beds <input id="beds" type="number" min="10" max="80" step="10" value="40" /></label>
+          <label>Minimum RNs per 10 beds <input id="ratio" type="number" min="0.5" max="4" step="0.5" value="2" /></label>
+          <div class="location"><span>LOCATION</span><strong>Tampa, Florida</strong></div>
+          <div class="action-wrap"><button id="run-button" class="primary" type="button">Build staffing plan <span aria-hidden="true">↗</span></button></div>
+        </div>
+        <p class="micro">This ratio is an illustrative demo rule, not a legal or clinical staffing standard.</p>
+      </section>
+
+      <section class="metrics" aria-label="Plan summary">
+        <article class="metric"><span>RN TARGET</span><strong id="target-count">8</strong><small>for the new unit</small></article>
+        <article class="metric"><span>APPROVED MOVES</span><strong id="selected-count">—</strong><small>under the demo rules</small></article>
+        <article class="metric accent"><span>REMAINING GAP</span><strong id="gap-count">—</strong><small>needs another source</small></article>
+        <article class="metric"><span>RULE REJECTIONS</span><strong id="rejected-count">—</strong><small>blocked before saving</small></article>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel decision-panel" aria-labelledby="decisions-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">02 / PROPOSE → CHECK → REVISE</p><h2 id="decisions-title">Decision trail</h2></div>
+            <span id="plan-status" class="status">Ready to plan</span>
+          </div>
+          <div id="decisions" class="decisions" aria-live="polite">
+            <div class="empty-state">Press <strong>Build staffing plan</strong> to evaluate candidates in skill order. Every proposed move is checked before it enters the plan.</div>
+          </div>
+        </section>
+
+        <aside class="panel coverage-panel" aria-labelledby="coverage-title">
+          <div class="section-heading"><div><p class="eyebrow">03 / GUARDRAILS</p><h2 id="coverage-title">Source unit coverage</h2></div></div>
+          <div class="table-scroll"><table><thead><tr><th>UNIT</th><th>RNs</th><th>FLOOR</th><th>ROOM</th></tr></thead><tbody id="unit-rows"></tbody></table></div>
+          <p class="micro">“Room” is the number of RNs above the synthetic floor after planned moves.</p>
+        </aside>
+      </div>
+
+      <section class="panel outcome-panel" aria-labelledby="outcome-title">
+        <div class="section-heading"><div><p class="eyebrow">04 / THE ANSWER</p><h2 id="outcome-title">What can we staff?</h2></div><button id="copy-button" class="text-button" type="button" disabled>Copy summary</button></div>
+        <div id="outcome" class="outcome-empty">Run the scenario to see approved transfers, the remaining gap, and the longer-term career pathway.</div>
+      </section>
+
+      <footer>Demo data is fictional. Results are an illustration of rule-based planning and must not be used for real staffing or licensure decisions.</footer>
+    </main>
+  </body>
+</html>
