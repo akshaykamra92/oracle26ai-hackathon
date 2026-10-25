@@ -40,6 +40,7 @@ This is a **rules-engine prototype**, not a live AI agent or Oracle integration.
 - `BUILD_HANDOFF.md`: copy-ready prompts for another Codex chat.
 - `SUBMISSION_DRAFT.md`: pitch text, demo script, and submission checklist.
 - `RUBRIC_MAP.md`: honest mapping from the AI Judge rubric to current proof and next evidence.
+- `WORKFORCE_MODEL.md`: proposed job-family, location, and cascade rules for the next iteration.
 
 ## Limits
 

@@ -42,6 +42,9 @@ The [American Hospital Association's 2026 workforce scan](https://www.aha.org/sy
 - “Approved” means approved by the demo's rules only.
 - A potential LPN-to-RN pathway does not create a licensed RN today. Education, examination, and licensure must be verified before any real role change. See the [Florida Board of Nursing](https://floridasnursing.gov/nurse-rn-lpn/) for actual licensure requirements.
 - Future Oracle, live data, and real AI agent integration are outside this MVP.
+- The current 6-of-8 result covers direct moves under a single RN floor. A move from 7 RNs down to a floor of 6 is allowed; it does not need a backfill under the modeled rule. The result is not a full workforce-network optimum.
+
+The proposed next iteration in [WORKFORCE_MODEL.md](WORKFORCE_MODEL.md) adds job families, level and specialty requirements, geographic eligibility, and backfill chains. Its result should be recalculated from those rules; do not reuse 6-of-8 if the new rules change the answer.
 
 ## Pitch direction for team review
 
