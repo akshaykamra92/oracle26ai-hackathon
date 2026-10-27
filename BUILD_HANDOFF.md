@@ -1,5 +1,7 @@
 # Copy-ready prompts for other Codex chats — team discussion draft
 
+For the full decision history, scope changes, current score status, and repository reading order, start with [PROJECT_HISTORY.md](PROJECT_HISTORY.md).
+
 ## Which model to use
 
 Use **GPT-6.1 Sol at medium reasoning** for a coding or documentation chat, if it is available in your Codex setup. Give it a single concrete deliverable and ask it to verify the running app before pushing. Use a higher reasoning setting only for a difficult planner rewrite or integration. The shipped browser app runs a deterministic rules engine and **does not call a model at runtime**. Model availability and pricing can vary; check the [official model catalog](https://developers.openai.com/api/docs/models) before choosing an API model for a later extension.

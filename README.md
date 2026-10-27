@@ -2,7 +2,7 @@
 
 A standalone, synthetic workforce expansion planner built for a two-hour hackathon. It answers a practical question: **can we staff a new location from our existing workforce without creating a shortage elsewhere, and if not, when might the right role mix become available?**
 
-**[Live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/)** · **[Team brief](TEAM_BRIEF.md)** · **[Revised submission copy](SUBMISSION_V5_DRAFT.md)** · **[Judge feedback response](JUDGE_FEEDBACK_RESPONSE.md)**
+**[Live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/)** · **[Project history and AI handoff](PROJECT_HISTORY.md)** · **[Team brief](TEAM_BRIEF.md)** · **[Revised submission copy](SUBMISSION_V5_DRAFT.md)** · **[Judge feedback response](JUDGE_FEEDBACK_RESPONSE.md)**
 
 The default example is a proposed Tampa rehab unit. The same planner also runs two **nonlicensed service** examples, showing that the demand → eligibility → source coverage → future readiness workflow can support other job families when their rules are configured.
 
@@ -52,6 +52,7 @@ The source table shows before → after totals and senior/lead coverage. “Room
 - `index.html`, `styles.css`, `app.js`, `planner.js`: standalone demo and planner.
 - `tests/planner.test.js`: default outcomes and core guardrails.
 - `TEAM_BRIEF.md`: problem statement, first user, and demo scope.
+- `PROJECT_HISTORY.md`: chronological planning decisions, scope changes, workforce rules, AI Judge results, claim boundaries, and continuation instructions for other AI models.
 - `WORKFORCE_MODEL.md`: implemented rules, assumptions, and expansion path.
 - `BUILD_HANDOFF.md`: copy-ready prompts for other Codex chats.
 - `SUBMISSION_DRAFT.md`: portal answers and spoken demo script for team review.
