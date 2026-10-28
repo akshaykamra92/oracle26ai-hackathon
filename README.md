@@ -2,7 +2,9 @@
 
 A standalone, synthetic workforce expansion planner built for a two-hour hackathon. It answers a practical question: **can we staff a new location from our existing workforce without creating a shortage elsewhere, and if not, when might the right role mix become available?**
 
-**[Live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/)** · **[Project history and AI handoff](PROJECT_HISTORY.md)** · **[Team brief](TEAM_BRIEF.md)** · **[Revised submission copy](SUBMISSION_V5_DRAFT.md)** · **[Judge feedback response](JUDGE_FEEDBACK_RESPONSE.md)**
+**[Live demo](https://akshaykamra92.github.io/oracle26ai-hackathon/)** · **[Watch the 74-second showcase](demo/showcase.mp4)** · **[Video transcript](demo/README.md)** · **[Project history and AI handoff](PROJECT_HISTORY.md)** · **[Team brief](TEAM_BRIEF.md)** · **[Revised submission copy](SUBMISSION_V5_DRAFT.md)** · **[Judge feedback response](JUDGE_FEEDBACK_RESPONSE.md)**
+
+[![Can We Staff It? showcase poster](demo/poster.png)](demo/showcase.mp4)
 
 The default example is a proposed Tampa rehab unit. The same planner also runs two **nonlicensed service** examples, showing that the demand → eligibility → source coverage → future readiness workflow can support other job families when their rules are configured.
 
